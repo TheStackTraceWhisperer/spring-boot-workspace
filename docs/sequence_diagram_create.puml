@@ -1,0 +1,29 @@
+@startuml
+actor User
+participant GreetingController
+participant GreetingService
+participant GreetingRepository
+participant Greeting
+
+User -> GreetingController: POST /api/greetings?name=John
+activate GreetingController
+
+GreetingController -> GreetingService: create("John")
+activate GreetingService
+
+GreetingService -> Greeting: new Greeting("Hello, John!")
+activate Greeting
+Greeting --> GreetingService: greeting
+deactivate Greeting
+
+GreetingService -> GreetingRepository: save(greeting)
+activate GreetingRepository
+GreetingRepository --> GreetingService: savedGreeting
+deactivate GreetingRepository
+
+GreetingService --> GreetingController: savedGreeting
+deactivate GreetingService
+
+GreetingController --> User: 201 Created (savedGreeting)
+deactivate GreetingController
+@enduml

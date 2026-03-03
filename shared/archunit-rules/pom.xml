@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.example</groupId>
+    <artifactId>shared-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../../parents/shared-parent</relativePath>
+  </parent>
+
+  <artifactId>archunit-rules</artifactId>
+  <name>archunit-rules</name>
+  <description>Shared ArchUnit rules for all library and application modules</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.tngtech.archunit</groupId>
+      <artifactId>archunit-junit5</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- JUnit 5 API for test infrastructure -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+</project>

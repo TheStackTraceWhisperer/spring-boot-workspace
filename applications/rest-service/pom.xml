@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.example</groupId>
+    <artifactId>application-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../../parents/application-parent</relativePath>
+  </parent>
+
+  <artifactId>rest-service</artifactId>
+  <name>rest-service</name>
+  <description>Spring Boot REST service module</description>
+
+  <properties>
+    <jacoco.ut.line.minimum>0.90</jacoco.ut.line.minimum>
+    <jacoco.ut.branch.minimum>0.00</jacoco.ut.branch.minimum>
+    <jacoco.merged.line.minimum>0.90</jacoco.merged.line.minimum>
+    <jacoco.merged.branch.minimum>0.00</jacoco.merged.branch.minimum>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.example</groupId>
+      <artifactId>library</artifactId>
+      <!-- Samuel: You don't need this! see: boms/internal-bom/pom.xml -->
+      <!--<version>0.0.1-SNAPSHOT</version>-->
+    </dependency>
+
+    <dependency>
+      <groupId>com.example</groupId>
+      <artifactId>spring-library</artifactId>
+      <!-- Samuel: You don't need this! see: boms/internal-bom/pom.xml -->
+      <!--<version>0.0.1-SNAPSHOT</version>-->
+    </dependency>
+
+    <dependency>
+      <groupId>com.example</groupId>
+      <artifactId>liquibase</artifactId>
+      <!-- Samuel: We are only using this for initializing the database schema during dev/testing, and then strictly for **schema validation** in production. -->
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <!-- Samuel: Virtual Threads on Web? WebFlux? -->
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <!-- Samuel: How do you know if you need a cache? -->
+      <!-- Samuel: DEFINE DB SCHEMA -> JPA -> PERFORMANCE TESTING -> DB INDEXES -> HIBERNATE NATIVE QUERY(IES) -> RAW JDBC -> DISTRIBUTED (REMOTE) CACHE -> LOCAL CACHE -->
+    </dependency>
+
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+    </dependency>
+
+    <!-- SpringDoc OpenAPI (Swagger UI) -->
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    </dependency>
+
+    <!-- Actuator for Prometheus metrics -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+
+    <!-- Micrometer Prometheus Registry -->
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-prometheus</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-webmvc-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>testcontainers-postgresql</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
+

@@ -1,0 +1,17 @@
+@startuml
+actor User
+participant GreetingController
+participant MyService
+
+User -> GreetingController: GET /api/greetings/greet
+activate GreetingController
+
+GreetingController -> MyService: greet()
+activate MyService
+MyService --> GreetingController: "Hello from MyService!"
+deactivate MyService
+
+GreetingController --> User: 200 OK ("Hello from MyService!")
+deactivate GreetingController
+@enduml
+

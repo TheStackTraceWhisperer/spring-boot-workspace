@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.example</groupId>
+  <artifactId>spring-boot-workspace</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>spring-boot-workspace</name>
+  <description>Spring Boot Multi-Module Workspace - Grandparent POM</description>
+
+  <properties>
+    <!-- Java version -->
+    <java.version>21</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <maven.compiler.release>${java.version}</maven.compiler.release>
+
+    <!-- Encoding -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <!-- Reproducible Builds -->
+    <project.build.outputTimestamp>2024-01-01T00:00:00Z</project.build.outputTimestamp>
+
+    <!-- BOM Versions -->
+    <boms.spring-boot.version>4.0.3</boms.spring-boot.version>
+    <boms.micrometer.version>1.16.1</boms.micrometer.version>
+
+    <!-- Dependency Versions -->
+    <deps.archunit.version>1.4.1</deps.archunit.version>
+    <deps.byte-buddy.version>1.18.5</deps.byte-buddy.version>
+    <deps.lombok.version>1.18.38</deps.lombok.version>
+    <deps.springdoc.version>2.8.8</deps.springdoc.version>
+    <deps.swagger-annotations.version>2.2.30</deps.swagger-annotations.version>
+
+    <!-- Plugin Versions -->
+    <plugins.maven-compiler.version>3.15.0</plugins.maven-compiler.version>
+    <plugins.maven-surefire.version>3.5.5</plugins.maven-surefire.version>
+    <plugins.maven-failsafe.version>3.5.5</plugins.maven-failsafe.version>
+    <plugins.maven-jar.version>3.5.0</plugins.maven-jar.version>
+    <plugins.maven-war.version>3.5.1</plugins.maven-war.version>
+    <plugins.maven-resources.version>3.4.0</plugins.maven-resources.version>
+    <plugins.maven-clean.version>3.5.0</plugins.maven-clean.version>
+    <plugins.maven-install.version>3.1.4</plugins.maven-install.version>
+    <plugins.maven-deploy.version>3.1.4</plugins.maven-deploy.version>
+    <plugins.maven-site.version>3.21.0</plugins.maven-site.version>
+    <plugins.spring-boot-maven.version>${boms.spring-boot.version}</plugins.spring-boot-maven.version>
+    <plugins.maven-enforcer.version>3.6.2</plugins.maven-enforcer.version>
+    <plugins.maven-dependency.version>3.10.0</plugins.maven-dependency.version>
+    <plugins.versions-maven.version>2.21.0</plugins.versions-maven.version>
+    <plugins.jacoco-maven.version>0.8.13</plugins.jacoco-maven.version>
+
+    <!-- JaCoCo Coverage Thresholds -->
+    <jacoco.skip>true</jacoco.skip>
+    <jacoco.ut.line.minimum>0.80</jacoco.ut.line.minimum>
+    <jacoco.ut.branch.minimum>0.00</jacoco.ut.branch.minimum>
+    <jacoco.it.line.minimum>0.00</jacoco.it.line.minimum>
+    <jacoco.it.branch.minimum>0.00</jacoco.it.branch.minimum>
+    <jacoco.merged.line.minimum>0.80</jacoco.merged.line.minimum>
+    <jacoco.merged.branch.minimum>0.00</jacoco.merged.branch.minimum>
+  </properties>
+
+  <modules>
+    <module>boms</module>
+    <module>shared</module>
+    <module>parents</module>
+    <module>libraries</module>
+    <module>applications</module>
+    <module>coverage</module>
+  </modules>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!-- Maven Compiler Plugin -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${plugins.maven-compiler.version}</version>
+          <configuration>
+            <source>${maven.compiler.source}</source>
+            <target>${maven.compiler.target}</target>
+            <release>${maven.compiler.release}</release>
+            <encoding>${project.build.sourceEncoding}</encoding>
+            <parameters>true</parameters>
+            <showWarnings>true</showWarnings>
+            <showDeprecation>true</showDeprecation>
+            <annotationProcessorPaths>
+              <path>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${deps.lombok.version}</version>
+              </path>
+            </annotationProcessorPaths>
+          </configuration>
+        </plugin>
+
+        <!-- Maven Surefire Plugin (Unit Tests) -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${plugins.maven-surefire.version}</version>
+          <configuration>
+            <argLine>
+              @{argLine}
+              -XX:+EnableDynamicAgentLoading
+              -javaagent:${settings.localRepository}/net/bytebuddy/byte-buddy-agent/${deps.byte-buddy.version}/byte-buddy-agent-${deps.byte-buddy.version}.jar
+              -Xshare:off
+              --add-opens java.base/java.lang.invoke=ALL-UNNAMED
+            </argLine>
+          </configuration>
+        </plugin>
+
+        <!-- Maven Failsafe Plugin (Integration Tests) -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>${plugins.maven-failsafe.version}</version>
+          <configuration>
+            <argLine>
+              @{argLine}
+              -XX:+EnableDynamicAgentLoading
+              -javaagent:${settings.localRepository}/net/bytebuddy/byte-buddy-agent/${deps.byte-buddy.version}/byte-buddy-agent-${deps.byte-buddy.version}.jar
+              -Xshare:off
+              --add-opens java.base/java.lang.invoke=ALL-UNNAMED
+            </argLine>
+          </configuration>
+        </plugin>
+
+        <!-- Maven JAR Plugin -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>${plugins.maven-jar.version}</version>
+          <configuration>
+            <archive>
+              <manifest>
+                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+              </manifest>
+              <manifestEntries>
+                <Build-Time>${maven.build.timestamp}</Build-Time>
+              </manifestEntries>
+            </archive>
+          </configuration>
+        </plugin>
+
+        <!-- Maven WAR Plugin -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>${plugins.maven-war.version}</version>
+        </plugin>
+
+        <!-- Maven Resources Plugin -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${plugins.maven-resources.version}</version>
+          <configuration>
+            <encoding>${project.build.sourceEncoding}</encoding>
+          </configuration>
+        </plugin>
+
+        <!-- Maven Clean Plugin -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>${plugins.maven-clean.version}</version>
+        </plugin>
+
+        <!-- Maven Install Plugin -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>${plugins.maven-install.version}</version>
+        </plugin>
+
+        <!-- Maven Deploy Plugin -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${plugins.maven-deploy.version}</version>
+        </plugin>
+
+        <!-- Maven Site Plugin -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>${plugins.maven-site.version}</version>
+        </plugin>
+
+        <!-- Spring Boot Maven Plugin -->
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${plugins.spring-boot-maven.version}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>repackage</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- Maven Enforcer Plugin -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${plugins.maven-enforcer.version}</version>
+          <executions>
+            <execution>
+              <id>enforce-maven-version</id>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+              <configuration>
+                <rules>
+                  <requireMavenVersion>
+                    <version>[3.9.0,)</version>
+                  </requireMavenVersion>
+                  <requireJavaVersion>
+                    <version>[21,)</version>
+                  </requireJavaVersion>
+                </rules>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- Maven Dependency Plugin -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>${plugins.maven-dependency.version}</version>
+        </plugin>
+
+        <!-- Versions Maven Plugin -->
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>${plugins.versions-maven.version}</version>
+          <configuration>
+            <rulesUri>classpath:///maven-version-rules.xml</rulesUri>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>com.example</groupId>
+              <artifactId>build-tools</artifactId>
+              <version>${project.version}</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+
+        <!-- JaCoCo Maven Plugin -->
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${plugins.jacoco-maven.version}</version>
+          <executions>
+            <!-- Unit-test agent: writes to target/jacoco-ut.exec -->
+            <execution>
+              <id>jacoco-ut</id>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+              <configuration>
+                <destFile>${project.build.directory}/jacoco-ut.exec</destFile>
+                <propertyName>argLine</propertyName>
+              </configuration>
+            </execution>
+
+            <!-- Unit-test report: reads target/jacoco-ut.exec -->
+            <execution>
+              <id>jacoco-ut-report</id>
+              <phase>test</phase>
+              <goals>
+                <goal>report</goal>
+              </goals>
+              <configuration>
+                <dataFile>${project.build.directory}/jacoco-ut.exec</dataFile>
+                <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+              </configuration>
+            </execution>
+
+            <!-- Unit-test coverage check -->
+            <execution>
+              <id>jacoco-ut-check</id>
+              <phase>test</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
+              <configuration>
+                <dataFile>${project.build.directory}/jacoco-ut.exec</dataFile>
+                <rules>
+                  <rule>
+                    <element>BUNDLE</element>
+                    <limits>
+                      <limit>
+                        <counter>LINE</counter>
+                        <value>COVEREDRATIO</value>
+                        <minimum>${jacoco.ut.line.minimum}</minimum>
+                      </limit>
+                      <limit>
+                        <counter>BRANCH</counter>
+                        <value>COVEREDRATIO</value>
+                        <minimum>${jacoco.ut.branch.minimum}</minimum>
+                      </limit>
+                    </limits>
+                  </rule>
+                </rules>
+              </configuration>
+            </execution>
+
+            <!-- Integration-test agent: writes to target/jacoco-it.exec -->
+            <execution>
+              <id>jacoco-it</id>
+              <goals>
+                <goal>prepare-agent-integration</goal>
+              </goals>
+              <configuration>
+                <destFile>${project.build.directory}/jacoco-it.exec</destFile>
+                <propertyName>argLine</propertyName>
+              </configuration>
+            </execution>
+
+            <!-- Integration-test report: reads target/jacoco-it.exec -->
+            <execution>
+              <id>jacoco-it-report</id>
+              <phase>post-integration-test</phase>
+              <goals>
+                <goal>report-integration</goal>
+              </goals>
+              <configuration>
+                <dataFile>${project.build.directory}/jacoco-it.exec</dataFile>
+                <outputDirectory>${project.reporting.outputDirectory}/jacoco-it</outputDirectory>
+              </configuration>
+            </execution>
+
+            <!-- Integration-test coverage check -->
+            <execution>
+              <id>jacoco-it-check</id>
+              <phase>post-integration-test</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
+              <configuration>
+                <dataFile>${project.build.directory}/jacoco-it.exec</dataFile>
+                <rules>
+                  <rule>
+                    <element>BUNDLE</element>
+                    <limits>
+                      <limit>
+                        <counter>LINE</counter>
+                        <value>COVEREDRATIO</value>
+                        <minimum>${jacoco.it.line.minimum}</minimum>
+                      </limit>
+                      <limit>
+                        <counter>BRANCH</counter>
+                        <value>COVEREDRATIO</value>
+                        <minimum>${jacoco.it.branch.minimum}</minimum>
+                      </limit>
+                    </limits>
+                  </rule>
+                </rules>
+              </configuration>
+            </execution>
+
+            <!-- Merge UT + IT exec files -->
+            <execution>
+              <id>jacoco-merged</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>merge</goal>
+              </goals>
+              <configuration>
+                <destFile>${project.build.directory}/jacoco-merged.exec</destFile>
+                <fileSets>
+                  <fileSet>
+                    <directory>${project.build.directory}</directory>
+                    <includes>
+                      <include>jacoco-ut.exec</include>
+                      <include>jacoco-it.exec</include>
+                    </includes>
+                  </fileSet>
+                </fileSets>
+              </configuration>
+            </execution>
+
+            <!-- Merged report -->
+            <execution>
+              <id>jacoco-merged-report</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>report</goal>
+              </goals>
+              <configuration>
+                <dataFile>${project.build.directory}/jacoco-merged.exec</dataFile>
+                <outputDirectory>${project.reporting.outputDirectory}/jacoco-merged</outputDirectory>
+              </configuration>
+            </execution>
+
+            <!-- Merged coverage check -->
+            <execution>
+              <id>jacoco-merged-check</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
+              <configuration>
+                <dataFile>${project.build.directory}/jacoco-merged.exec</dataFile>
+                <rules>
+                  <rule>
+                    <element>BUNDLE</element>
+                    <limits>
+                      <limit>
+                        <counter>LINE</counter>
+                        <value>COVEREDRATIO</value>
+                        <minimum>${jacoco.merged.line.minimum}</minimum>
+                      </limit>
+                      <limit>
+                        <counter>BRANCH</counter>
+                        <value>COVEREDRATIO</value>
+                        <minimum>${jacoco.merged.branch.minimum}</minimum>
+                      </limit>
+                    </limits>
+                  </rule>
+                </rules>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- Copy dark-themed report.css over JaCoCo's default CSS -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>3.1.0</version>
+          <dependencies>
+            <dependency>
+              <groupId>com.example</groupId>
+              <artifactId>build-tools</artifactId>
+              <version>${project.version}</version>
+            </dependency>
+          </dependencies>
+          <executions>
+            <execution>
+              <id>jacoco-dark-theme</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>run</goal>
+              </goals>
+              <configuration>
+                <skip>${jacoco.skip}</skip>
+                <target>
+                  <taskdef resource="net/sf/antcontrib/antcontrib.properties"
+                           classpathref="maven.plugin.classpath" onerror="ignore" />
+                  <!-- Only run when at least one JaCoCo report directory exists -->
+                  <condition property="has.jacoco.reports">
+                    <or>
+                      <available file="${project.reporting.outputDirectory}/jacoco-ut/jacoco-resources" type="dir" />
+                      <available file="${project.reporting.outputDirectory}/jacoco-it/jacoco-resources" type="dir" />
+                      <available file="${project.reporting.outputDirectory}/jacoco-merged/jacoco-resources" type="dir" />
+                    </or>
+                  </condition>
+                  <sequential>
+                    <!-- Extract the custom CSS from classpath -->
+                    <mkdir dir="${project.build.directory}/jacoco-dark-theme" />
+                    <copy tofile="${project.build.directory}/jacoco-dark-theme/report.css" overwrite="true">
+                      <javaresource name="jacoco/report.css" classpathref="maven.plugin.classpath" />
+                    </copy>
+                    <!-- Overwrite CSS in each JaCoCo report directory, if it exists -->
+                    <copy file="${project.build.directory}/jacoco-dark-theme/report.css"
+                          todir="${project.reporting.outputDirectory}/jacoco-ut/jacoco-resources"
+                          overwrite="true" failonerror="false" quiet="true" />
+                    <copy file="${project.build.directory}/jacoco-dark-theme/report.css"
+                          todir="${project.reporting.outputDirectory}/jacoco-it/jacoco-resources"
+                          overwrite="true" failonerror="false" quiet="true" />
+                    <copy file="${project.build.directory}/jacoco-dark-theme/report.css"
+                          todir="${project.reporting.outputDirectory}/jacoco-merged/jacoco-resources"
+                          overwrite="true" failonerror="false" quiet="true" />
+                  </sequential>
+                </target>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <!-- Enable enforcer plugin for all modules -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+      </plugin>
+
+      <!-- Enable JaCoCo for all modules -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+      </plugin>
+
+      <!-- Enable dark-themed JaCoCo reports for all modules -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

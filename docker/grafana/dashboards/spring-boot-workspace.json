@@ -1,0 +1,1425 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": { "type": "grafana", "uid": "-- Grafana --" },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [],
+  "panels": [
+
+    {
+      "title": "Overview",
+      "type": "row",
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
+      "collapsed": false,
+      "panels": []
+    },
+    {
+      "title": "Uptime",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 4, "x": 0, "y": 1 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "s" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "process_uptime_seconds{application=\"$application\"}",
+          "legendFormat": "uptime",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "Start Time",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 4, "x": 4, "y": 1 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "dateTimeAsIso" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "process_start_time_seconds{application=\"$application\"} * 1000",
+          "legendFormat": "start",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "CPU Usage (Process)",
+      "type": "gauge",
+      "gridPos": { "h": 4, "w": 4, "x": 8, "y": 1 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "max": 1, "min": 0, "unit": "percentunit",
+          "thresholds": {
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 0.5 },
+              { "color": "red", "value": 0.8 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "process_cpu_usage{application=\"$application\"}",
+          "legendFormat": "process cpu",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "CPU Usage (System)",
+      "type": "gauge",
+      "gridPos": { "h": 4, "w": 4, "x": 12, "y": 1 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "max": 1, "min": 0, "unit": "percentunit",
+          "thresholds": {
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 0.5 },
+              { "color": "red", "value": 0.8 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "system_cpu_usage{application=\"$application\"}",
+          "legendFormat": "system cpu",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "System CPU Count",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 4, "x": 16, "y": 1 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "system_cpu_count{application=\"$application\"}",
+          "legendFormat": "cpus",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "Open File Descriptors",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 4, "x": 20, "y": 1 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "process_files_open_files{application=\"$application\"}",
+          "legendFormat": "open",
+          "refId": "A"
+        },
+        {
+          "expr": "process_files_max_files{application=\"$application\"}",
+          "legendFormat": "max",
+          "refId": "B"
+        }
+      ]
+    },
+
+    {
+      "title": "JVM Memory",
+      "type": "row",
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 5 },
+      "collapsed": false,
+      "panels": []
+    },
+    {
+      "title": "JVM Heap Memory Used vs Committed vs Max",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 6 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "bytes" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "sum(jvm_memory_used_bytes{application=\"$application\", area=\"heap\"})",
+          "legendFormat": "heap used",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(jvm_memory_committed_bytes{application=\"$application\", area=\"heap\"})",
+          "legendFormat": "heap committed",
+          "refId": "B"
+        },
+        {
+          "expr": "sum(jvm_memory_max_bytes{application=\"$application\", area=\"heap\"})",
+          "legendFormat": "heap max",
+          "refId": "C"
+        }
+      ]
+    },
+    {
+      "title": "JVM Non-Heap Memory Used vs Committed",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 6 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "bytes" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "sum(jvm_memory_used_bytes{application=\"$application\", area=\"nonheap\"})",
+          "legendFormat": "non-heap used",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(jvm_memory_committed_bytes{application=\"$application\", area=\"nonheap\"})",
+          "legendFormat": "non-heap committed",
+          "refId": "B"
+        }
+      ]
+    },
+    {
+      "title": "JVM Heap Memory Pools",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 14 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "bytes" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "jvm_memory_used_bytes{application=\"$application\", area=\"heap\"}",
+          "legendFormat": "{{id}} used",
+          "refId": "A"
+        },
+        {
+          "expr": "jvm_memory_committed_bytes{application=\"$application\", area=\"heap\"}",
+          "legendFormat": "{{id}} committed",
+          "refId": "B"
+        }
+      ]
+    },
+    {
+      "title": "JVM Non-Heap Memory Pools",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 14 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "bytes" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "jvm_memory_used_bytes{application=\"$application\", area=\"nonheap\"}",
+          "legendFormat": "{{id}} used",
+          "refId": "A"
+        },
+        {
+          "expr": "jvm_memory_committed_bytes{application=\"$application\", area=\"nonheap\"}",
+          "legendFormat": "{{id}} committed",
+          "refId": "B"
+        }
+      ]
+    },
+    {
+      "title": "JVM Buffer Pools",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 22 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "bytes" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "jvm_buffer_memory_used_bytes{application=\"$application\"}",
+          "legendFormat": "{{id}} used",
+          "refId": "A"
+        },
+        {
+          "expr": "jvm_buffer_total_capacity_bytes{application=\"$application\"}",
+          "legendFormat": "{{id}} capacity",
+          "refId": "B"
+        }
+      ]
+    },
+    {
+      "title": "JVM Buffer Count",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 22 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "jvm_buffer_count_buffers{application=\"$application\"}",
+          "legendFormat": "{{id}}",
+          "refId": "A"
+        }
+      ]
+    },
+
+    {
+      "title": "Garbage Collection",
+      "type": "row",
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 30 },
+      "collapsed": false,
+      "panels": []
+    },
+    {
+      "title": "GC Pause Duration (avg per minute)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 31 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "s" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(jvm_gc_pause_seconds_sum{application=\"$application\"}[1m]) / rate(jvm_gc_pause_seconds_count{application=\"$application\"}[1m])",
+          "legendFormat": "{{action}} {{cause}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "GC Pause Rate (pauses/s)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 31 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "ops" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(jvm_gc_pause_seconds_count{application=\"$application\"}[1m])",
+          "legendFormat": "{{action}} {{cause}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "GC Pause Total Time Spent (s/s)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 31 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "s" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(jvm_gc_pause_seconds_sum{application=\"$application\"}[1m])",
+          "legendFormat": "{{action}} {{cause}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "GC Memory Allocated / Promoted",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 39 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "Bps" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(jvm_gc_memory_allocated_bytes_total{application=\"$application\"}[1m])",
+          "legendFormat": "allocated",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(jvm_gc_memory_promoted_bytes_total{application=\"$application\"}[1m])",
+          "legendFormat": "promoted",
+          "refId": "B"
+        }
+      ]
+    },
+    {
+      "title": "GC Live Data / Max Data Size",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 39 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "bytes" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "jvm_gc_live_data_size_bytes{application=\"$application\"}",
+          "legendFormat": "live data",
+          "refId": "A"
+        },
+        {
+          "expr": "jvm_gc_max_data_size_bytes{application=\"$application\"}",
+          "legendFormat": "max data",
+          "refId": "B"
+        }
+      ]
+    },
+
+    {
+      "title": "JVM Threads",
+      "type": "row",
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 47 },
+      "collapsed": false,
+      "panels": []
+    },
+    {
+      "title": "Thread Count",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 48 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "jvm_threads_live_threads{application=\"$application\"}",
+          "legendFormat": "live",
+          "refId": "A"
+        },
+        {
+          "expr": "jvm_threads_daemon_threads{application=\"$application\"}",
+          "legendFormat": "daemon",
+          "refId": "B"
+        },
+        {
+          "expr": "jvm_threads_peak_threads{application=\"$application\"}",
+          "legendFormat": "peak",
+          "refId": "C"
+        }
+      ]
+    },
+    {
+      "title": "Thread States",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 48 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "custom": { "drawStyle": "bars", "fillOpacity": 30, "stacking": { "mode": "normal" } }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "jvm_threads_states_threads{application=\"$application\"}",
+          "legendFormat": "{{state}}",
+          "refId": "A"
+        }
+      ]
+    },
+
+    {
+      "title": "Class Loading",
+      "type": "row",
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 56 },
+      "collapsed": false,
+      "panels": []
+    },
+    {
+      "title": "Loaded Classes",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 57 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "jvm_classes_loaded_classes{application=\"$application\"}",
+          "legendFormat": "loaded",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "Class Unload Rate",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 57 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "ops" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(jvm_classes_unloaded_classes_total{application=\"$application\"}[1m])",
+          "legendFormat": "unloaded/s",
+          "refId": "A"
+        }
+      ]
+    },
+
+    {
+      "title": "HTTP Server Requests",
+      "type": "row",
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 65 },
+      "collapsed": false,
+      "panels": []
+    },
+    {
+      "title": "HTTP Request Rate",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 66 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "custom": { "drawStyle": "bars", "fillOpacity": 30 }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(http_server_requests_seconds_count{application=\"$application\"}[1m])",
+          "legendFormat": "{{method}} {{uri}} [{{status}}]",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "HTTP Error Rate (4xx + 5xx)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 66 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "custom": { "drawStyle": "bars", "fillOpacity": 30 }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(http_server_requests_seconds_count{application=\"$application\", status=~\"4..|5..\"}[1m])",
+          "legendFormat": "{{method}} {{uri}} [{{status}}]",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "HTTP Response Time (p50 / p95 / p99)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 74 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "s" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, rate(http_server_requests_seconds_bucket{application=\"$application\"}[1m]))",
+          "legendFormat": "p50",
+          "refId": "A"
+        },
+        {
+          "expr": "histogram_quantile(0.95, rate(http_server_requests_seconds_bucket{application=\"$application\"}[1m]))",
+          "legendFormat": "p95",
+          "refId": "B"
+        },
+        {
+          "expr": "histogram_quantile(0.99, rate(http_server_requests_seconds_bucket{application=\"$application\"}[1m]))",
+          "legendFormat": "p99",
+          "refId": "C"
+        }
+      ]
+    },
+    {
+      "title": "HTTP Response Time by Endpoint (p99)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 74 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "s" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.99, sum by (le, method, uri) (rate(http_server_requests_seconds_bucket{application=\"$application\"}[1m])))",
+          "legendFormat": "{{method}} {{uri}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "HTTP Average Response Time",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 82 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "s" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(http_server_requests_seconds_sum{application=\"$application\"}[1m]) / rate(http_server_requests_seconds_count{application=\"$application\"}[1m])",
+          "legendFormat": "{{method}} {{uri}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "HTTP Request Duration Heatmap",
+      "type": "heatmap",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 82 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "options": {
+        "calculate": false,
+        "yAxis": { "unit": "s" },
+        "color": { "scheme": "Spectral", "mode": "spectrum" }
+      },
+      "targets": [
+        {
+          "expr": "sum(increase(http_server_requests_seconds_bucket{application=\"$application\"}[1m])) by (le)",
+          "legendFormat": "{{le}}",
+          "refId": "A",
+          "format": "heatmap"
+        }
+      ]
+    },
+
+    {
+      "title": "Tomcat",
+      "type": "row",
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 90 },
+      "collapsed": false,
+      "panels": []
+    },
+    {
+      "title": "Tomcat Threads",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 91 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "tomcat_threads_current_threads{application=\"$application\"}",
+          "legendFormat": "current",
+          "refId": "A"
+        },
+        {
+          "expr": "tomcat_threads_busy_threads{application=\"$application\"}",
+          "legendFormat": "busy",
+          "refId": "B"
+        },
+        {
+          "expr": "tomcat_threads_config_max_threads{application=\"$application\"}",
+          "legendFormat": "max",
+          "refId": "C"
+        }
+      ]
+    },
+    {
+      "title": "Tomcat Sessions",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 91 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "tomcat_sessions_active_current_sessions{application=\"$application\"}",
+          "legendFormat": "active current",
+          "refId": "A"
+        },
+        {
+          "expr": "tomcat_sessions_active_max_sessions{application=\"$application\"}",
+          "legendFormat": "active max",
+          "refId": "B"
+        },
+        {
+          "expr": "rate(tomcat_sessions_created_sessions_total{application=\"$application\"}[1m])",
+          "legendFormat": "created/s",
+          "refId": "C"
+        },
+        {
+          "expr": "rate(tomcat_sessions_expired_sessions_total{application=\"$application\"}[1m])",
+          "legendFormat": "expired/s",
+          "refId": "D"
+        },
+        {
+          "expr": "rate(tomcat_sessions_rejected_sessions_total{application=\"$application\"}[1m])",
+          "legendFormat": "rejected/s",
+          "refId": "E"
+        }
+      ]
+    },
+    {
+      "title": "Tomcat Bytes Sent / Received",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 91 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "Bps" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(tomcat_global_sent_bytes_total{application=\"$application\"}[1m])",
+          "legendFormat": "sent",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(tomcat_global_received_bytes_total{application=\"$application\"}[1m])",
+          "legendFormat": "received",
+          "refId": "B"
+        }
+      ]
+    },
+    {
+      "title": "Tomcat Request Count & Errors",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 99 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "reqps" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(tomcat_global_request_seconds_count{application=\"$application\"}[1m])",
+          "legendFormat": "requests/s",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(tomcat_global_error_total{application=\"$application\"}[1m])",
+          "legendFormat": "errors/s",
+          "refId": "B"
+        }
+      ]
+    },
+    {
+      "title": "Tomcat Request Processing Time",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 99 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "s" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(tomcat_global_request_seconds_sum{application=\"$application\"}[1m]) / rate(tomcat_global_request_seconds_count{application=\"$application\"}[1m])",
+          "legendFormat": "avg processing time",
+          "refId": "A"
+        },
+        {
+          "expr": "tomcat_global_request_max_seconds{application=\"$application\"}",
+          "legendFormat": "max processing time",
+          "refId": "B"
+        }
+      ]
+    },
+    {
+      "title": "Tomcat Connections",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 107 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "tomcat_connections_current_connections{application=\"$application\"}",
+          "legendFormat": "current",
+          "refId": "A"
+        },
+        {
+          "expr": "tomcat_connections_keepalive_current_connections{application=\"$application\"}",
+          "legendFormat": "keepalive",
+          "refId": "B"
+        },
+        {
+          "expr": "tomcat_connections_config_max_connections{application=\"$application\"}",
+          "legendFormat": "max",
+          "refId": "C"
+        }
+      ]
+    },
+    {
+      "title": "Tomcat Cache",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 107 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "ops" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(tomcat_cache_access_total{application=\"$application\"}[1m])",
+          "legendFormat": "access/s",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(tomcat_cache_hit_total{application=\"$application\"}[1m])",
+          "legendFormat": "hit/s",
+          "refId": "B"
+        }
+      ]
+    },
+
+    {
+      "title": "HikariCP Connection Pool",
+      "type": "row",
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 115 },
+      "collapsed": false,
+      "panels": []
+    },
+    {
+      "title": "Connection Pool Size",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 108 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "hikaricp_connections_active{application=\"$application\"}",
+          "legendFormat": "active",
+          "refId": "A"
+        },
+        {
+          "expr": "hikaricp_connections_idle{application=\"$application\"}",
+          "legendFormat": "idle",
+          "refId": "B"
+        },
+        {
+          "expr": "hikaricp_connections{application=\"$application\"}",
+          "legendFormat": "total",
+          "refId": "C"
+        },
+        {
+          "expr": "hikaricp_connections_min{application=\"$application\"}",
+          "legendFormat": "min",
+          "refId": "D"
+        },
+        {
+          "expr": "hikaricp_connections_max{application=\"$application\"}",
+          "legendFormat": "max",
+          "refId": "E"
+        }
+      ]
+    },
+    {
+      "title": "Connection Pool Pending",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 108 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "hikaricp_connections_pending{application=\"$application\"}",
+          "legendFormat": "pending",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "Connection Acquisition Time (avg)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 108 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "s" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(hikaricp_connections_acquire_seconds_sum{application=\"$application\"}[1m]) / rate(hikaricp_connections_acquire_seconds_count{application=\"$application\"}[1m])",
+          "legendFormat": "acquire avg",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "Connection Creation Time (avg)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 116 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "s" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(hikaricp_connections_creation_seconds_sum{application=\"$application\"}[1m]) / rate(hikaricp_connections_creation_seconds_count{application=\"$application\"}[1m])",
+          "legendFormat": "creation avg",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "Connection Usage Time (avg)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 116 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "s" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(hikaricp_connections_usage_seconds_sum{application=\"$application\"}[1m]) / rate(hikaricp_connections_usage_seconds_count{application=\"$application\"}[1m])",
+          "legendFormat": "usage avg",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "Connection Timeout Rate",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 116 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "ops" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(hikaricp_connections_timeout_total{application=\"$application\"}[1m])",
+          "legendFormat": "timeouts/s",
+          "refId": "A"
+        }
+      ]
+    },
+
+    {
+      "title": "Hibernate / JPA",
+      "type": "row",
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 124 },
+      "collapsed": false,
+      "panels": []
+    },
+    {
+      "title": "Hibernate Query Execution Rate",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 125 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "ops" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(hibernate_query_executions_total{application=\"$application\"}[1m])",
+          "legendFormat": "queries/s",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(hibernate_query_natural_id_executions_total{application=\"$application\"}[1m])",
+          "legendFormat": "natural id queries/s",
+          "refId": "B"
+        }
+      ]
+    },
+    {
+      "title": "Hibernate Entity Operations",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 125 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "ops" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(hibernate_entities_inserts_total{application=\"$application\"}[1m])",
+          "legendFormat": "inserts/s",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(hibernate_entities_updates_total{application=\"$application\"}[1m])",
+          "legendFormat": "updates/s",
+          "refId": "B"
+        },
+        {
+          "expr": "rate(hibernate_entities_deletes_total{application=\"$application\"}[1m])",
+          "legendFormat": "deletes/s",
+          "refId": "C"
+        },
+        {
+          "expr": "rate(hibernate_entities_loads_total{application=\"$application\"}[1m])",
+          "legendFormat": "loads/s",
+          "refId": "D"
+        },
+        {
+          "expr": "rate(hibernate_entities_fetches_total{application=\"$application\"}[1m])",
+          "legendFormat": "fetches/s",
+          "refId": "E"
+        }
+      ]
+    },
+    {
+      "title": "Hibernate Second-Level Cache Hit Ratio",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 133 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "percentunit", "min": 0, "max": 1 },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(hibernate_second_level_cache_hit_count_total{application=\"$application\"}[1m]) / (rate(hibernate_second_level_cache_hit_count_total{application=\"$application\"}[1m]) + rate(hibernate_second_level_cache_miss_count_total{application=\"$application\"}[1m]))",
+          "legendFormat": "{{region}} hit ratio",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "Hibernate Statements & Flushes",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 133 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "ops" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(hibernate_statements_total{application=\"$application\"}[1m])",
+          "legendFormat": "statements/s",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(hibernate_flushes_total{application=\"$application\"}[1m])",
+          "legendFormat": "flushes/s",
+          "refId": "B"
+        },
+        {
+          "expr": "rate(hibernate_optimistic_lock_failures_total{application=\"$application\"}[1m])",
+          "legendFormat": "optimistic lock failures/s",
+          "refId": "C"
+        },
+        {
+          "expr": "rate(hibernate_transactions_total{application=\"$application\"}[1m])",
+          "legendFormat": "transactions/s ({{result}})",
+          "refId": "D"
+        }
+      ]
+    },
+    {
+      "title": "Spring Data Repository Invocations (p99)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 141 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "s" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.99, rate(spring_data_repository_invocations_seconds_bucket{application=\"$application\"}[1m]))",
+          "legendFormat": "{{repository}}.{{method}} p99",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "Spring Data Repository Invocation Rate",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 141 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "ops" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(spring_data_repository_invocations_seconds_count{application=\"$application\"}[1m])",
+          "legendFormat": "{{repository}}.{{method}}",
+          "refId": "A"
+        }
+      ]
+    },
+
+    {
+      "title": "Logback",
+      "type": "row",
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 149 },
+      "collapsed": false,
+      "panels": []
+    },
+    {
+      "title": "Log Events Rate by Level",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 150 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ops",
+          "custom": { "drawStyle": "bars", "fillOpacity": 30, "stacking": { "mode": "normal" } }
+        },
+        "overrides": [
+          { "matcher": { "id": "byName", "options": "error" }, "properties": [{ "id": "color", "value": { "fixedColor": "red", "mode": "fixed" } }] },
+          { "matcher": { "id": "byName", "options": "warn" }, "properties": [{ "id": "color", "value": { "fixedColor": "orange", "mode": "fixed" } }] },
+          { "matcher": { "id": "byName", "options": "info" }, "properties": [{ "id": "color", "value": { "fixedColor": "green", "mode": "fixed" } }] },
+          { "matcher": { "id": "byName", "options": "debug" }, "properties": [{ "id": "color", "value": { "fixedColor": "blue", "mode": "fixed" } }] },
+          { "matcher": { "id": "byName", "options": "trace" }, "properties": [{ "id": "color", "value": { "fixedColor": "purple", "mode": "fixed" } }] }
+        ]
+      },
+      "targets": [
+        {
+          "expr": "rate(logback_events_total{application=\"$application\"}[1m])",
+          "legendFormat": "{{level}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "Log Errors & Warnings (Total)",
+      "type": "stat",
+      "gridPos": { "h": 8, "w": 6, "x": 12, "y": 150 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "orange", "value": 1 },
+              { "color": "red", "value": 10 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "logback_events_total{application=\"$application\", level=\"error\"}",
+          "legendFormat": "errors",
+          "refId": "A"
+        },
+        {
+          "expr": "logback_events_total{application=\"$application\", level=\"warn\"}",
+          "legendFormat": "warnings",
+          "refId": "B"
+        }
+      ]
+    },
+
+    {
+      "title": "Disk Space",
+      "type": "row",
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 158 },
+      "collapsed": false,
+      "panels": []
+    },
+    {
+      "title": "Disk Space",
+      "type": "gauge",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 159 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "thresholds": {
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "orange", "value": 0.2 },
+              { "color": "green", "value": 0.5 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "disk_free_bytes{application=\"$application\"}",
+          "legendFormat": "free",
+          "refId": "A"
+        },
+        {
+          "expr": "disk_total_bytes{application=\"$application\"}",
+          "legendFormat": "total",
+          "refId": "B"
+        }
+      ]
+    },
+    {
+      "title": "Disk Usage %",
+      "type": "gauge",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 159 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "min": 0, "max": 1, "unit": "percentunit",
+          "thresholds": {
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "orange", "value": 0.75 },
+              { "color": "red", "value": 0.9 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "1 - (disk_free_bytes{application=\"$application\"} / disk_total_bytes{application=\"$application\"})",
+          "legendFormat": "used %",
+          "refId": "A"
+        }
+      ]
+    },
+
+    {
+      "title": "Process",
+      "type": "row",
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 167 },
+      "collapsed": false,
+      "panels": []
+    },
+    {
+      "title": "CPU Usage Over Time",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 168 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "percentunit", "min": 0, "max": 1 },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "process_cpu_usage{application=\"$application\"}",
+          "legendFormat": "process",
+          "refId": "A"
+        },
+        {
+          "expr": "system_cpu_usage{application=\"$application\"}",
+          "legendFormat": "system",
+          "refId": "B"
+        }
+      ]
+    },
+    {
+      "title": "File Descriptors Over Time",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 168 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "process_files_open_files{application=\"$application\"}",
+          "legendFormat": "open",
+          "refId": "A"
+        },
+        {
+          "expr": "process_files_max_files{application=\"$application\"}",
+          "legendFormat": "max",
+          "refId": "B"
+        }
+      ]
+    },
+
+    {
+      "title": "Application Events",
+      "type": "row",
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 176 },
+      "collapsed": false,
+      "panels": []
+    },
+    {
+      "title": "Application Startup Time",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 177 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "s" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "application_started_time_seconds{application=\"$application\"}",
+          "legendFormat": "started",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "Application Ready Time",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 177 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "s" },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "application_ready_time_seconds{application=\"$application\"}",
+          "legendFormat": "ready",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "JVM Info",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 12, "x": 12, "y": 177 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "mappings": [{ "type": "value", "options": { "1": { "text": "Running", "color": "green" } } }] },
+        "overrides": []
+      },
+      "options": { "textMode": "name" },
+      "targets": [
+        {
+          "expr": "jvm_info{application=\"$application\"}",
+          "legendFormat": "{{runtime}} {{version}} ({{vendor}})",
+          "refId": "A"
+        }
+      ]
+    },
+
+    {
+      "title": "Spring Caching",
+      "type": "row",
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 181 },
+      "collapsed": false,
+      "panels": []
+    },
+    {
+      "title": "Cache Hit Ratio",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 182 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": { "unit": "percentunit", "min": 0, "max": 1 },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(cache_gets_total{application=\"$application\", result=\"hit\"}[1m]) / rate(cache_gets_total{application=\"$application\"}[1m])",
+          "legendFormat": "{{cache}} hit ratio",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "Cache Size & Evictions",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 182 },
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "cache_size{application=\"$application\"}",
+          "legendFormat": "{{cache}}",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(cache_evictions_total{application=\"$application\"}[1m])",
+          "legendFormat": "{{cache}} evictions/s",
+          "refId": "B"
+        },
+        {
+          "expr": "rate(cache_puts_total{application=\"$application\"}[1m])",
+          "legendFormat": "{{cache}} puts/s",
+          "refId": "C"
+        }
+      ]
+    }
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "Prometheus",
+          "value": "Prometheus"
+        },
+        "hide": 2,
+        "includeAll": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "spring-boot-workspace",
+          "value": "spring-boot-workspace"
+        },
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "definition": "label_values(jvm_info, application)",
+        "hide": 0,
+        "includeAll": false,
+        "name": "application",
+        "query": "label_values(jvm_info, application)",
+        "refresh": 2,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-30m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Spring Boot Workspace",
+  "uid": "spring-boot-workspace",
+  "version": 2
+}
+

@@ -1,0 +1,104 @@
+@startuml
+skinparam componentStyle uml2
+skinparam linetype ortho
+skinparam nodesep 100
+skinparam ranksep 100
+
+' Colors
+skinparam component {
+    BackgroundColor<<Root>> #E0E0E0
+    BackgroundColor<<BOM>> #FFCCBC
+    BackgroundColor<<Parent>> #BBDEFB
+    BackgroundColor<<Module>> #FFF9C4
+    BackgroundColor<<Shared>> #C8E6C9
+    BackgroundColor<<Report>> #D1C4E9
+    BorderColor Black
+    ArrowColor Black
+}
+
+title Project Architecture & Build Structure
+
+' --- Logical Architecture (Code Modules) ---
+package "Applications" {
+    component "rest-service" as rest_service <<Module>>
+}
+
+package "Domain Libraries" {
+    component "library" as library <<Module>>
+    component "spring-library" as spring_library <<Module>>
+}
+
+package "Shared Capabilities" {
+    component "liquibase" as liquibase <<Shared>>
+    component "test-fixtures" as test_fixtures <<Shared>>
+    component "archunit-rules" as archunit_rules <<Shared>>
+    component "build-tools" as build_tools <<Shared>>
+}
+
+package "Reporting" {
+    component "coverage" as coverage <<Report>>
+}
+
+' --- Build Infrastructure (POMs & BOMs) ---
+package "Build System" {
+    component "spring-boot-workspace" as root_pom <<Root>>
+
+    package "BOMs" {
+        component "external-bom" as external_bom <<BOM>>
+        component "internal-bom" as internal_bom <<BOM>>
+    }
+
+    package "Parents" {
+        component "application-parent" as application_parent <<Parent>>
+        component "library-parent" as library_parent <<Parent>>
+        component "shared-parent" as shared_parent <<Parent>>
+    }
+}
+
+' --- Relationships ---
+
+' 1. Logical Dependencies (Code usage)
+rest_service -down-> library #Green : uses
+rest_service -down-> spring_library #Green : uses
+rest_service -down-> liquibase #Green : uses
+
+' 2. Test Dependencies (Implicit via Parents, but shown for clarity)
+library .down.> liquibase #Orange : test
+library .down.> test_fixtures #Orange : test
+rest_service .down.> test_fixtures #Orange : test
+
+' 3. Build Inheritance (The "Managed By" view)
+rest_service -right-|> application_parent #Blue
+library -right-|> library_parent #Blue
+spring_library -right-|> library_parent #Blue
+liquibase -right-|> shared_parent #Blue
+test_fixtures -right-|> shared_parent #Blue
+archunit_rules -right-|> shared_parent #Blue
+build_tools -right-|> shared_parent #Blue
+coverage -right-|> root_pom #Blue
+
+' 4. Build System Internals
+application_parent -up-|> root_pom #Blue
+library_parent -up-|> root_pom #Blue
+shared_parent -up-|> root_pom #Blue
+external_bom -up-|> root_pom #Blue
+internal_bom -up-|> root_pom #Blue
+
+application_parent .down.> internal_bom #Red : imports
+library_parent .down.> external_bom #Red : imports
+shared_parent .down.> external_bom #Red : imports
+internal_bom .down.> external_bom #Red : imports
+
+' 5. Parent Capabilities
+' Show that parents provide these shared capabilities
+application_parent .down.> archunit_rules #Orange : provides
+application_parent .down.> test_fixtures #Orange : provides
+library_parent .down.> archunit_rules #Orange : provides
+library_parent .down.> test_fixtures #Orange : provides
+
+' 6. Coverage Aggregation
+coverage .down.> rest_service #Purple : aggregates
+coverage .down.> library #Purple : aggregates
+coverage .down.> spring_library #Purple : aggregates
+
+@enduml

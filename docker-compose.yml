@@ -1,0 +1,110 @@
+services:
+
+  # ──────────────────────────────────────────────────────────
+  # PostgreSQL — initialized with Liquibase schema
+  # ──────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:17
+    container_name: workspace-postgres
+    environment:
+      POSTGRES_DB: workspace
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d workspace"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # ──────────────────────────────────────────────────────────
+  # Liquibase — runs migrations against PostgreSQL on startup
+  # ──────────────────────────────────────────────────────────
+  liquibase:
+    image: liquibase/liquibase:4.31
+    container_name: workspace-liquibase
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./shared/liquibase/src/main/resources/db:/liquibase/db
+    command:
+      - --url=jdbc:postgresql://postgres:5432/workspace
+      - --username=postgres
+      - --password=postgres
+      - --changelog-file=db/changelog/db.changelog-master.yaml
+      - --log-level=info
+      - update
+
+  # ──────────────────────────────────────────────────────────
+  # Spring Boot Application — with remote debug (port 5005)
+  # ──────────────────────────────────────────────────────────
+  rest-service:
+    image: eclipse-temurin:21-jre
+    container_name: workspace-rest-service
+    depends_on:
+      liquibase:
+        condition: service_completed_successfully
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    volumes:
+      - ./applications/rest-service/target/rest-service-0.0.1-SNAPSHOT.jar:/app/rest-service.jar:ro
+    environment:
+      JAVA_TOOL_OPTIONS: >-
+        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/workspace
+      SPRING_LIQUIBASE_ENABLED: "false"
+    command: ["java", "-jar", "/app/rest-service.jar"]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8080/actuator/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  # ──────────────────────────────────────────────────────────
+  # Prometheus — scrapes the Spring Boot actuator endpoint
+  # ──────────────────────────────────────────────────────────
+  prometheus:
+    image: prom/prometheus:v3.2.1
+    container_name: workspace-prometheus
+    depends_on:
+      rest-service:
+        condition: service_healthy
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.retention.time=30d
+
+  # ──────────────────────────────────────────────────────────
+  # Grafana — pre-configured with Prometheus datasource
+  # ──────────────────────────────────────────────────────────
+  grafana:
+    image: grafana/grafana:11.5.2
+    container_name: workspace-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - ./docker/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./docker/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
+
+volumes:
+  postgres-data:
+  prometheus-data:
+  grafana-data:
+

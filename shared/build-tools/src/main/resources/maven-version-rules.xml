@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Version rules for the Maven Versions Plugin.
+
+  These rules exclude non-GA (General Availability) releases from version
+  update suggestions. When running goals like versions:display-dependency-updates
+  or versions:display-plugin-updates, versions matching the ignored patterns
+  below will be filtered out.
+
+  Patterns use Java regex and are matched case-insensitively against version strings.
+
+  Usage:
+    mvn versions:display-dependency-updates
+    mvn versions:display-plugin-updates
+    mvn versions:display-property-updates
+-->
+<ruleset xmlns="http://mojo.codehaus.org/versions-maven-plugin/rule/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://mojo.codehaus.org/versions-maven-plugin/rule/2.0.0
+         https://www.mojohaus.org/versions-maven-plugin/xsd/rule-2.0.0.xsd"
+         comparisonMethod="maven">
+
+  <rules>
+    <!-- Global rule: ignore all non-GA versions -->
+    <rule groupId="*" artifactId="*" comparisonMethod="">
+      <ignoreVersions>
+        <!-- Alpha releases -->
+        <ignoreVersion type="regex">(?i).*[-.]alpha[-.\d]*</ignoreVersion>
+        <ignoreVersion type="regex">(?i).*[-.]a\d+</ignoreVersion>
+
+        <!-- Beta releases -->
+        <ignoreVersion type="regex">(?i).*[-.]beta[-.\d]*</ignoreVersion>
+        <ignoreVersion type="regex">(?i).*[-.]b\d+</ignoreVersion>
+
+        <!-- Milestone releases -->
+        <ignoreVersion type="regex">(?i).*[-.]M\d+</ignoreVersion>
+        <ignoreVersion type="regex">(?i).*[-.]milestone[-.\d]*</ignoreVersion>
+
+        <!-- Release candidates -->
+        <ignoreVersion type="regex">(?i).*[-.]rc[-.\d]*</ignoreVersion>
+        <ignoreVersion type="regex">(?i).*[-.]cr[-.\d]*</ignoreVersion>
+
+        <!-- Development / snapshot / preview -->
+        <ignoreVersion type="regex">(?i).*[-.]dev[-.\d]*</ignoreVersion>
+        <ignoreVersion type="regex">(?i).*[-.]snapshot</ignoreVersion>
+        <ignoreVersion type="regex">(?i).*[-.]preview[-.\d]*</ignoreVersion>
+        <ignoreVersion type="regex">(?i).*[-.]ea[-.\d]*</ignoreVersion>
+
+        <!-- Spring-specific pre-release qualifiers -->
+        <ignoreVersion type="regex">(?i).*[-.]RC\d+</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+  </rules>
+
+</ruleset>
+

@@ -1,0 +1,1239 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] spring-boot-workspace                                              [pom]
+[INFO] shared-parent                                                      [pom]
+[INFO] build-tools                                                        [jar]
+[INFO] external-bom                                                       [pom]
+[INFO] internal-bom                                                       [pom]
+[INFO] boms                                                               [pom]
+[INFO] liquibase                                                          [jar]
+[INFO] archunit-rules                                                     [jar]
+[INFO] test-fixtures                                                      [jar]
+[INFO] shared                                                             [pom]
+[INFO] library-parent                                                     [pom]
+[INFO] application-parent                                                 [pom]
+[INFO] parents                                                            [pom]
+[INFO] library                                                            [jar]
+[INFO] spring-library                                                     [jar]
+[INFO] libraries                                                          [pom]
+[INFO] application                                                        [jar]
+[INFO] applications                                                       [pom]
+[INFO] coverage                                                           [pom]
+[INFO] 
+[INFO] -----------------< com.example:spring-boot-workspace >------------------
+[INFO] Building spring-boot-workspace 0.0.1-SNAPSHOT                     [1/19]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ spring-boot-workspace ---
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (enforce-maven-version) @ spring-boot-workspace ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (jacoco-ut) @ spring-boot-workspace ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-ut-report) @ spring-boot-workspace ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-ut-check) @ spring-boot-workspace ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent-integration (jacoco-it) @ spring-boot-workspace ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-integration (jacoco-it-report) @ spring-boot-workspace ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-it-check) @ spring-boot-workspace ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:merge (jacoco-merged) @ spring-boot-workspace ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-merged-report) @ spring-boot-workspace ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-merged-check) @ spring-boot-workspace ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- antrun:3.1.0:run (jacoco-dark-theme) @ spring-boot-workspace ---
+[INFO] Skipping Antrun execution
+[INFO] 
+[INFO] ---------------------< com.example:shared-parent >----------------------
+[INFO] Building shared-parent 0.0.1-SNAPSHOT                             [2/19]
+[INFO]   from parents/shared-parent/pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ shared-parent ---
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (enforce-maven-version) @ shared-parent ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (jacoco-ut) @ shared-parent ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-ut-report) @ shared-parent ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-ut-check) @ shared-parent ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent-integration (jacoco-it) @ shared-parent ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-integration (jacoco-it-report) @ shared-parent ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-it-check) @ shared-parent ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:merge (jacoco-merged) @ shared-parent ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-merged-report) @ shared-parent ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-merged-check) @ shared-parent ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- antrun:3.1.0:run (jacoco-dark-theme) @ shared-parent ---
+[INFO] Skipping Antrun execution
+[INFO] 
+[INFO] ----------------------< com.example:build-tools >-----------------------
+[INFO] Building build-tools 0.0.1-SNAPSHOT                               [3/19]
+[INFO]   from shared/build-tools/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ build-tools ---
+[INFO] Deleting /home/samuel/projects/spring-boot-workspace/shared/build-tools/target
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (enforce-maven-version) @ build-tools ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (jacoco-ut) @ build-tools ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ build-tools ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ build-tools ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ build-tools ---
+[INFO] skip non existing resourceDirectory /home/samuel/projects/spring-boot-workspace/shared/build-tools/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ build-tools ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ build-tools ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-ut-report) @ build-tools ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-ut-check) @ build-tools ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ build-tools ---
+[INFO] Building jar: /home/samuel/projects/spring-boot-workspace/shared/build-tools/target/build-tools-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent-integration (jacoco-it) @ build-tools ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-integration (jacoco-it-report) @ build-tools ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-it-check) @ build-tools ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:merge (jacoco-merged) @ build-tools ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-merged-report) @ build-tools ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-merged-check) @ build-tools ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- antrun:3.1.0:run (jacoco-dark-theme) @ build-tools ---
+[INFO] Skipping Antrun execution
+[INFO] 
+[INFO] ----------------------< com.example:external-bom >----------------------
+[INFO] Building external-bom 0.0.1-SNAPSHOT                              [4/19]
+[INFO]   from boms/external-bom/pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ external-bom ---
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (enforce-maven-version) @ external-bom ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (jacoco-ut) @ external-bom ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-ut-report) @ external-bom ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-ut-check) @ external-bom ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent-integration (jacoco-it) @ external-bom ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-integration (jacoco-it-report) @ external-bom ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-it-check) @ external-bom ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:merge (jacoco-merged) @ external-bom ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-merged-report) @ external-bom ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-merged-check) @ external-bom ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- antrun:3.1.0:run (jacoco-dark-theme) @ external-bom ---
+[INFO] Skipping Antrun execution
+[INFO] 
+[INFO] ----------------------< com.example:internal-bom >----------------------
+[INFO] Building internal-bom 0.0.1-SNAPSHOT                              [5/19]
+[INFO]   from boms/internal-bom/pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ internal-bom ---
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (enforce-maven-version) @ internal-bom ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (jacoco-ut) @ internal-bom ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-ut-report) @ internal-bom ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-ut-check) @ internal-bom ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent-integration (jacoco-it) @ internal-bom ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-integration (jacoco-it-report) @ internal-bom ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-it-check) @ internal-bom ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:merge (jacoco-merged) @ internal-bom ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-merged-report) @ internal-bom ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-merged-check) @ internal-bom ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- antrun:3.1.0:run (jacoco-dark-theme) @ internal-bom ---
+[INFO] Skipping Antrun execution
+[INFO] 
+[INFO] --------------------------< com.example:boms >--------------------------
+[INFO] Building boms 0.0.1-SNAPSHOT                                      [6/19]
+[INFO]   from boms/pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ boms ---
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (enforce-maven-version) @ boms ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (jacoco-ut) @ boms ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-ut-report) @ boms ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-ut-check) @ boms ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent-integration (jacoco-it) @ boms ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-integration (jacoco-it-report) @ boms ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-it-check) @ boms ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:merge (jacoco-merged) @ boms ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-merged-report) @ boms ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-merged-check) @ boms ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- antrun:3.1.0:run (jacoco-dark-theme) @ boms ---
+[INFO] Skipping Antrun execution
+[INFO] 
+[INFO] -----------------------< com.example:liquibase >------------------------
+[INFO] Building liquibase 0.0.1-SNAPSHOT                                 [7/19]
+[INFO]   from shared/liquibase/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ liquibase ---
+[INFO] Deleting /home/samuel/projects/spring-boot-workspace/shared/liquibase/target
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (enforce-maven-version) @ liquibase ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (jacoco-ut) @ liquibase ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ liquibase ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ liquibase ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ liquibase ---
+[INFO] skip non existing resourceDirectory /home/samuel/projects/spring-boot-workspace/shared/liquibase/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ liquibase ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ liquibase ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-ut-report) @ liquibase ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-ut-check) @ liquibase ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ liquibase ---
+[INFO] Building jar: /home/samuel/projects/spring-boot-workspace/shared/liquibase/target/liquibase-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent-integration (jacoco-it) @ liquibase ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-integration (jacoco-it-report) @ liquibase ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-it-check) @ liquibase ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:merge (jacoco-merged) @ liquibase ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-merged-report) @ liquibase ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-merged-check) @ liquibase ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- antrun:3.1.0:run (jacoco-dark-theme) @ liquibase ---
+[INFO] Skipping Antrun execution
+[INFO] 
+[INFO] ---------------------< com.example:archunit-rules >---------------------
+[INFO] Building archunit-rules 0.0.1-SNAPSHOT                            [8/19]
+[INFO]   from shared/archunit-rules/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ archunit-rules ---
+[INFO] Deleting /home/samuel/projects/spring-boot-workspace/shared/archunit-rules/target
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (enforce-maven-version) @ archunit-rules ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (jacoco-ut) @ archunit-rules ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ archunit-rules ---
+[INFO] skip non existing resourceDirectory /home/samuel/projects/spring-boot-workspace/shared/archunit-rules/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ archunit-rules ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 2 source files with javac [debug deprecation parameters release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ archunit-rules ---
+[INFO] skip non existing resourceDirectory /home/samuel/projects/spring-boot-workspace/shared/archunit-rules/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ archunit-rules ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ archunit-rules ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-ut-report) @ archunit-rules ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-ut-check) @ archunit-rules ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ archunit-rules ---
+[INFO] Building jar: /home/samuel/projects/spring-boot-workspace/shared/archunit-rules/target/archunit-rules-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent-integration (jacoco-it) @ archunit-rules ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-integration (jacoco-it-report) @ archunit-rules ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-it-check) @ archunit-rules ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:merge (jacoco-merged) @ archunit-rules ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-merged-report) @ archunit-rules ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-merged-check) @ archunit-rules ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- antrun:3.1.0:run (jacoco-dark-theme) @ archunit-rules ---
+[INFO] Skipping Antrun execution
+[INFO] 
+[INFO] ---------------------< com.example:test-fixtures >----------------------
+[INFO] Building test-fixtures 0.0.1-SNAPSHOT                             [9/19]
+[INFO]   from shared/test-fixtures/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ test-fixtures ---
+[INFO] Deleting /home/samuel/projects/spring-boot-workspace/shared/test-fixtures/target
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (enforce-maven-version) @ test-fixtures ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (jacoco-ut) @ test-fixtures ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ test-fixtures ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ test-fixtures ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 4 source files with javac [debug deprecation parameters release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ test-fixtures ---
+[INFO] skip non existing resourceDirectory /home/samuel/projects/spring-boot-workspace/shared/test-fixtures/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ test-fixtures ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ test-fixtures ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-ut-report) @ test-fixtures ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-ut-check) @ test-fixtures ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ test-fixtures ---
+[INFO] Building jar: /home/samuel/projects/spring-boot-workspace/shared/test-fixtures/target/test-fixtures-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent-integration (jacoco-it) @ test-fixtures ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-integration (jacoco-it-report) @ test-fixtures ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-it-check) @ test-fixtures ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:merge (jacoco-merged) @ test-fixtures ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-merged-report) @ test-fixtures ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-merged-check) @ test-fixtures ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- antrun:3.1.0:run (jacoco-dark-theme) @ test-fixtures ---
+[INFO] Skipping Antrun execution
+[INFO] 
+[INFO] -------------------------< com.example:shared >-------------------------
+[INFO] Building shared 0.0.1-SNAPSHOT                                   [10/19]
+[INFO]   from shared/pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ shared ---
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (enforce-maven-version) @ shared ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (jacoco-ut) @ shared ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-ut-report) @ shared ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-ut-check) @ shared ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent-integration (jacoco-it) @ shared ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-integration (jacoco-it-report) @ shared ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-it-check) @ shared ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:merge (jacoco-merged) @ shared ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-merged-report) @ shared ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-merged-check) @ shared ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- antrun:3.1.0:run (jacoco-dark-theme) @ shared ---
+[INFO] Skipping Antrun execution
+[INFO] 
+[INFO] ---------------------< com.example:library-parent >---------------------
+[INFO] Building library-parent 0.0.1-SNAPSHOT                           [11/19]
+[INFO]   from parents/library-parent/pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ library-parent ---
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (enforce-maven-version) @ library-parent ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (jacoco-ut) @ library-parent ---
+[INFO] argLine set to -javaagent:/home/samuel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar=destfile=/home/samuel/projects/spring-boot-workspace/parents/library-parent/target/jacoco-ut.exec
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-ut-report) @ library-parent ---
+[INFO] Skipping JaCoCo execution due to missing execution data file.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-ut-check) @ library-parent ---
+[INFO] Skipping JaCoCo execution due to missing execution data file:/home/samuel/projects/spring-boot-workspace/parents/library-parent/target/jacoco-ut.exec
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent-integration (jacoco-it) @ library-parent ---
+[INFO] argLine set to -javaagent:/home/samuel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar=destfile=/home/samuel/projects/spring-boot-workspace/parents/library-parent/target/jacoco-it.exec
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-integration (jacoco-it-report) @ library-parent ---
+[INFO] Skipping JaCoCo execution due to missing execution data file.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-it-check) @ library-parent ---
+[INFO] Skipping JaCoCo execution due to missing execution data file:/home/samuel/projects/spring-boot-workspace/parents/library-parent/target/jacoco-it.exec
+[INFO] 
+[INFO] --- jacoco:0.8.13:merge (jacoco-merged) @ library-parent ---
+[INFO] Skipping JaCoCo merge execution due to missing execution data files
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-merged-report) @ library-parent ---
+[INFO] Skipping JaCoCo execution due to missing execution data file.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-merged-check) @ library-parent ---
+[INFO] Skipping JaCoCo execution due to missing execution data file:/home/samuel/projects/spring-boot-workspace/parents/library-parent/target/jacoco-merged.exec
+[INFO] 
+[INFO] --- antrun:3.1.0:run (jacoco-dark-theme) @ library-parent ---
+[INFO] Executing tasks
+[INFO]     [mkdir] Created dir: /home/samuel/projects/spring-boot-workspace/parents/library-parent/target/jacoco-dark-theme
+[INFO]      [copy] Copying 1 resource to /home/samuel/projects/spring-boot-workspace/parents/library-parent/target/jacoco-dark-theme
+[INFO]      [copy] Copying 1 file to /home/samuel/projects/spring-boot-workspace/parents/library-parent/target/site/jacoco-ut/jacoco-resources
+[INFO]      [copy] Copying 1 file to /home/samuel/projects/spring-boot-workspace/parents/library-parent/target/site/jacoco-it/jacoco-resources
+[INFO]      [copy] Copying 1 file to /home/samuel/projects/spring-boot-workspace/parents/library-parent/target/site/jacoco-merged/jacoco-resources
+[INFO] Executed tasks
+[INFO] 
+[INFO] -------------------< com.example:application-parent >-------------------
+[INFO] Building application-parent 0.0.1-SNAPSHOT                       [12/19]
+[INFO]   from parents/application-parent/pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ application-parent ---
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (enforce-maven-version) @ application-parent ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (jacoco-ut) @ application-parent ---
+[INFO] argLine set to -javaagent:/home/samuel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar=destfile=/home/samuel/projects/spring-boot-workspace/parents/application-parent/target/jacoco-ut.exec
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-ut-report) @ application-parent ---
+[INFO] Skipping JaCoCo execution due to missing execution data file.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-ut-check) @ application-parent ---
+[INFO] Skipping JaCoCo execution due to missing execution data file:/home/samuel/projects/spring-boot-workspace/parents/application-parent/target/jacoco-ut.exec
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent-integration (jacoco-it) @ application-parent ---
+[INFO] argLine set to -javaagent:/home/samuel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar=destfile=/home/samuel/projects/spring-boot-workspace/parents/application-parent/target/jacoco-it.exec
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-integration (jacoco-it-report) @ application-parent ---
+[INFO] Skipping JaCoCo execution due to missing execution data file.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-it-check) @ application-parent ---
+[INFO] Skipping JaCoCo execution due to missing execution data file:/home/samuel/projects/spring-boot-workspace/parents/application-parent/target/jacoco-it.exec
+[INFO] 
+[INFO] --- jacoco:0.8.13:merge (jacoco-merged) @ application-parent ---
+[INFO] Skipping JaCoCo merge execution due to missing execution data files
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-merged-report) @ application-parent ---
+[INFO] Skipping JaCoCo execution due to missing execution data file.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-merged-check) @ application-parent ---
+[INFO] Skipping JaCoCo execution due to missing execution data file:/home/samuel/projects/spring-boot-workspace/parents/application-parent/target/jacoco-merged.exec
+[INFO] 
+[INFO] --- antrun:3.1.0:run (jacoco-dark-theme) @ application-parent ---
+[INFO] Executing tasks
+[INFO]     [mkdir] Created dir: /home/samuel/projects/spring-boot-workspace/parents/application-parent/target/jacoco-dark-theme
+[INFO]      [copy] Copying 1 resource to /home/samuel/projects/spring-boot-workspace/parents/application-parent/target/jacoco-dark-theme
+[INFO]      [copy] Copying 1 file to /home/samuel/projects/spring-boot-workspace/parents/application-parent/target/site/jacoco-ut/jacoco-resources
+[INFO]      [copy] Copying 1 file to /home/samuel/projects/spring-boot-workspace/parents/application-parent/target/site/jacoco-it/jacoco-resources
+[INFO]      [copy] Copying 1 file to /home/samuel/projects/spring-boot-workspace/parents/application-parent/target/site/jacoco-merged/jacoco-resources
+[INFO] Executed tasks
+[INFO] 
+[INFO] ------------------------< com.example:parents >-------------------------
+[INFO] Building parents 0.0.1-SNAPSHOT                                  [13/19]
+[INFO]   from parents/pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ parents ---
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (enforce-maven-version) @ parents ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (jacoco-ut) @ parents ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-ut-report) @ parents ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-ut-check) @ parents ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent-integration (jacoco-it) @ parents ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-integration (jacoco-it-report) @ parents ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-it-check) @ parents ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:merge (jacoco-merged) @ parents ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-merged-report) @ parents ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-merged-check) @ parents ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- antrun:3.1.0:run (jacoco-dark-theme) @ parents ---
+[INFO] Skipping Antrun execution
+[INFO] 
+[INFO] ------------------------< com.example:library >-------------------------
+[INFO] Building library 0.0.1-SNAPSHOT                                  [14/19]
+[INFO]   from libraries/library/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ library ---
+[INFO] Deleting /home/samuel/projects/spring-boot-workspace/libraries/library/target
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (enforce-maven-version) @ library ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (jacoco-ut) @ library ---
+[INFO] argLine set to -javaagent:/home/samuel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar=destfile=/home/samuel/projects/spring-boot-workspace/libraries/library/target/jacoco-ut.exec
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ library ---
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ library ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 3 source files with javac [debug deprecation parameters release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ library ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ library ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 3 source files with javac [debug deprecation parameters release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ library ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.example.workspace.library.LibraryArchitectureTest
+19:43:55.456 [main] INFO com.tngtech.archunit.core.PluginLoader -- Detected Java version 25
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.206 s -- in com.example.workspace.library.LibraryArchitectureTest
+[INFO] Running com.example.workspace.core.service.GreetingServiceTest
+19:43:56.817 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.workspace.core.service.GreetingServiceTest]: GreetingServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:43:56.936 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.workspace.core.LibraryTestApplication for test class com.example.workspace.core.service.GreetingServiceTest
+19:43:57.133 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+19:43:57.135 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+19:43:57.148 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 2.0.3
+19:43:57.649 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+19:43:58.093 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+19:43:58.095 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is localhost
+19:43:58.111 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 28.4.0
+  API Version: 1.51
+  Operating System: Ubuntu 24.04.4 LTS
+  Total Memory: 15777 MB
+19:43:58.163 [main] INFO tc.testcontainers/ryuk:0.13.0 -- Creating container for image: testcontainers/ryuk:0.13.0
+19:43:58.340 [main] INFO tc.testcontainers/ryuk:0.13.0 -- Container testcontainers/ryuk:0.13.0 is starting: db56e3dd7e08dd419947a903044caa17ae1edca733c29a3fdab233733bda4859
+19:43:58.680 [main] INFO tc.testcontainers/ryuk:0.13.0 -- Container testcontainers/ryuk:0.13.0 started in PT0.517589311S
+19:43:58.686 [main] INFO org.testcontainers.utility.RyukResourceReaper -- Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+19:43:58.686 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+19:43:58.687 [main] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+19:43:58.687 [main] INFO tc.postgres:17-alpine -- Creating container for image: postgres:17-alpine
+19:43:58.720 [main] INFO tc.postgres:17-alpine -- Container postgres:17-alpine is starting: 77a3c282569be01d072a6172bebdc9e8121c43ac1ad29e6475e7250f6f7120f0
+19:43:59.952 [main] INFO tc.postgres:17-alpine -- Container postgres:17-alpine started in PT1.264609603S
+19:43:59.953 [main] INFO tc.postgres:17-alpine -- Container is started (JDBC URL: jdbc:postgresql://localhost:32781/testdb?loggerLevel=OFF)
+Mar 02, 2026 7:44:00 PM liquibase.database
+INFO: Set default schema name to public
+Mar 02, 2026 7:44:00 PM liquibase.changelog
+INFO: Creating database changelog table with name: public.databasechangelog
+Mar 02, 2026 7:44:00 PM liquibase.changelog
+INFO: Reading from public.databasechangelog
+Mar 02, 2026 7:44:00 PM liquibase.snapshot
+INFO: Creating snapshot
+Mar 02, 2026 7:44:01 PM liquibase.lockservice
+INFO: Successfully acquired change log lock
+Mar 02, 2026 7:44:01 PM liquibase.command
+INFO: Using deploymentId: 2502240169
+Mar 02, 2026 7:44:01 PM liquibase.changelog
+INFO: Reading from public.databasechangelog
+Running Changeset: db/changelog/001-create-schema.yaml::001-create-schema::workspace
+Mar 02, 2026 7:44:01 PM liquibase.changelog
+INFO: Table greeting created
+Mar 02, 2026 7:44:01 PM liquibase.changelog
+INFO: ChangeSet db/changelog/001-create-schema.yaml::001-create-schema::workspace ran successfully in 10ms
+
+UPDATE SUMMARY
+Run:                          1
+Previously run:               0
+Filtered out:                 0
+-------------------------------
+Total change sets:            1
+
+Mar 02, 2026 7:44:01 PM liquibase.util
+INFO: UPDATE SUMMARY
+Mar 02, 2026 7:44:01 PM liquibase.util
+INFO: Run:                          1
+Mar 02, 2026 7:44:01 PM liquibase.util
+INFO: Previously run:               0
+Mar 02, 2026 7:44:01 PM liquibase.util
+INFO: Filtered out:                 0
+Mar 02, 2026 7:44:01 PM liquibase.util
+INFO: -------------------------------
+Mar 02, 2026 7:44:01 PM liquibase.util
+INFO: Total change sets:            1
+Mar 02, 2026 7:44:01 PM liquibase.util
+INFO: Update summary generated
+Mar 02, 2026 7:44:01 PM liquibase.command
+INFO: Update command completed successfully.
+Liquibase: Update has been successful. Rows affected: 0
+Mar 02, 2026 7:44:01 PM liquibase.lockservice
+INFO: Successfully released change log lock
+Mar 02, 2026 7:44:01 PM liquibase.command
+INFO: Command execution complete
+2026-03-02T19:44:02.252-06:00  INFO 116688 --- [           main] c.e.w.core.service.GreetingServiceTest   : Starting GreetingServiceTest using Java 25 with PID 116688 (started by samuel in /home/samuel/projects/spring-boot-workspace/libraries/library)
+2026-03-02T19:44:02.253-06:00  INFO 116688 --- [           main] c.e.w.core.service.GreetingServiceTest   : The following 1 profile is active: "test-defaults"
+2026-03-02T19:44:02.677-06:00  INFO 116688 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-02T19:44:02.743-06:00  INFO 116688 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 53 ms. Found 1 JPA repository interface.
+2026-03-02T19:44:03.080-06:00  INFO 116688 --- [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-03-02T19:44:03.144-06:00  INFO 116688 --- [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-03-02T19:44:03.723-06:00  INFO 116688 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-02T19:44:03.774-06:00  INFO 116688 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-02T19:44:03.798-06:00  INFO 116688 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@73439017
+2026-03-02T19:44:03.800-06:00  INFO 116688 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-02T19:44:03.897-06:00  INFO 116688 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:32781/testdb?loggerLevel=OFF]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 17.9
+	Default catalog/schema: testdb/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-02T19:44:04.951-06:00  INFO 116688 --- [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-02T19:44:04.959-06:00  INFO 116688 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-02T19:44:05.047-06:00  INFO 116688 --- [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-02T19:44:05.435-06:00  INFO 116688 --- [           main] c.e.w.core.service.GreetingServiceTest   : Started GreetingServiceTest in 3.49 seconds (process running for 11.246)
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.527 s -- in com.example.workspace.core.service.GreetingServiceTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-ut-report) @ library ---
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/libraries/library/target/jacoco-ut.exec
+[INFO] Analyzed bundle 'library' with 2 classes
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-ut-check) @ library ---
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/libraries/library/target/jacoco-ut.exec
+[INFO] Analyzed bundle 'library' with 2 classes
+[INFO] All coverage checks have been met.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ library ---
+[INFO] Building jar: /home/samuel/projects/spring-boot-workspace/libraries/library/target/library-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent-integration (jacoco-it) @ library ---
+[INFO] argLine set to -javaagent:/home/samuel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar=destfile=/home/samuel/projects/spring-boot-workspace/libraries/library/target/jacoco-it.exec
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-integration (jacoco-it-report) @ library ---
+[INFO] Skipping JaCoCo execution due to missing execution data file.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-it-check) @ library ---
+[INFO] Skipping JaCoCo execution due to missing execution data file:/home/samuel/projects/spring-boot-workspace/libraries/library/target/jacoco-it.exec
+[INFO] 
+[INFO] --- jacoco:0.8.13:merge (jacoco-merged) @ library ---
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/libraries/library/target/jacoco-ut.exec
+[INFO] Writing merged execution data to /home/samuel/projects/spring-boot-workspace/libraries/library/target/jacoco-merged.exec
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-merged-report) @ library ---
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/libraries/library/target/jacoco-merged.exec
+[INFO] Analyzed bundle 'library' with 2 classes
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-merged-check) @ library ---
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/libraries/library/target/jacoco-merged.exec
+[INFO] Analyzed bundle 'library' with 2 classes
+[INFO] All coverage checks have been met.
+[INFO] 
+[INFO] --- antrun:3.1.0:run (jacoco-dark-theme) @ library ---
+[INFO] Executing tasks
+[INFO]     [mkdir] Created dir: /home/samuel/projects/spring-boot-workspace/libraries/library/target/jacoco-dark-theme
+[INFO]      [copy] Copying 1 resource to /home/samuel/projects/spring-boot-workspace/libraries/library/target/jacoco-dark-theme
+[INFO]      [copy] Copying 1 file to /home/samuel/projects/spring-boot-workspace/libraries/library/target/site/jacoco-ut/jacoco-resources
+[INFO]      [copy] Copying 1 file to /home/samuel/projects/spring-boot-workspace/libraries/library/target/site/jacoco-it/jacoco-resources
+[INFO]      [copy] Copying 1 file to /home/samuel/projects/spring-boot-workspace/libraries/library/target/site/jacoco-merged/jacoco-resources
+[INFO] Executed tasks
+[INFO] 
+[INFO] ---------------------< com.example:spring-library >---------------------
+[INFO] Building spring-library 0.0.1-SNAPSHOT                           [15/19]
+[INFO]   from libraries/spring-library/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ spring-library ---
+[INFO] Deleting /home/samuel/projects/spring-boot-workspace/libraries/spring-library/target
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (enforce-maven-version) @ spring-library ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (jacoco-ut) @ spring-library ---
+[INFO] argLine set to -javaagent:/home/samuel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar=destfile=/home/samuel/projects/spring-boot-workspace/libraries/spring-library/target/jacoco-ut.exec
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ spring-library ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ spring-library ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 2 source files with javac [debug deprecation parameters release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ spring-library ---
+[INFO] skip non existing resourceDirectory /home/samuel/projects/spring-boot-workspace/libraries/spring-library/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ spring-library ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug deprecation parameters release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ spring-library ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.example.springlibrary.config.MyAutoConfigurationTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.786 s -- in com.example.springlibrary.config.MyAutoConfigurationTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-ut-report) @ spring-library ---
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/libraries/spring-library/target/jacoco-ut.exec
+[INFO] Analyzed bundle 'spring-library' with 2 classes
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-ut-check) @ spring-library ---
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/libraries/spring-library/target/jacoco-ut.exec
+[INFO] Analyzed bundle 'spring-library' with 2 classes
+[INFO] All coverage checks have been met.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ spring-library ---
+[INFO] Building jar: /home/samuel/projects/spring-boot-workspace/libraries/spring-library/target/spring-library-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent-integration (jacoco-it) @ spring-library ---
+[INFO] argLine set to -javaagent:/home/samuel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar=destfile=/home/samuel/projects/spring-boot-workspace/libraries/spring-library/target/jacoco-it.exec
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-integration (jacoco-it-report) @ spring-library ---
+[INFO] Skipping JaCoCo execution due to missing execution data file.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-it-check) @ spring-library ---
+[INFO] Skipping JaCoCo execution due to missing execution data file:/home/samuel/projects/spring-boot-workspace/libraries/spring-library/target/jacoco-it.exec
+[INFO] 
+[INFO] --- jacoco:0.8.13:merge (jacoco-merged) @ spring-library ---
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/libraries/spring-library/target/jacoco-ut.exec
+[INFO] Writing merged execution data to /home/samuel/projects/spring-boot-workspace/libraries/spring-library/target/jacoco-merged.exec
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-merged-report) @ spring-library ---
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/libraries/spring-library/target/jacoco-merged.exec
+[INFO] Analyzed bundle 'spring-library' with 2 classes
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-merged-check) @ spring-library ---
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/libraries/spring-library/target/jacoco-merged.exec
+[INFO] Analyzed bundle 'spring-library' with 2 classes
+[INFO] All coverage checks have been met.
+[INFO] 
+[INFO] --- antrun:3.1.0:run (jacoco-dark-theme) @ spring-library ---
+[INFO] Executing tasks
+[INFO]     [mkdir] Created dir: /home/samuel/projects/spring-boot-workspace/libraries/spring-library/target/jacoco-dark-theme
+[INFO]      [copy] Copying 1 resource to /home/samuel/projects/spring-boot-workspace/libraries/spring-library/target/jacoco-dark-theme
+[INFO]      [copy] Copying 1 file to /home/samuel/projects/spring-boot-workspace/libraries/spring-library/target/site/jacoco-ut/jacoco-resources
+[INFO]      [copy] Copying 1 file to /home/samuel/projects/spring-boot-workspace/libraries/spring-library/target/site/jacoco-it/jacoco-resources
+[INFO]      [copy] Copying 1 file to /home/samuel/projects/spring-boot-workspace/libraries/spring-library/target/site/jacoco-merged/jacoco-resources
+[INFO] Executed tasks
+[INFO] 
+[INFO] -----------------------< com.example:libraries >------------------------
+[INFO] Building libraries 0.0.1-SNAPSHOT                                [16/19]
+[INFO]   from libraries/pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ libraries ---
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (enforce-maven-version) @ libraries ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (jacoco-ut) @ libraries ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-ut-report) @ libraries ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-ut-check) @ libraries ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent-integration (jacoco-it) @ libraries ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-integration (jacoco-it-report) @ libraries ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-it-check) @ libraries ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:merge (jacoco-merged) @ libraries ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-merged-report) @ libraries ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-merged-check) @ libraries ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- antrun:3.1.0:run (jacoco-dark-theme) @ libraries ---
+[INFO] Skipping Antrun execution
+[INFO] 
+[INFO] ----------------------< com.example:application >-----------------------
+[INFO] Building application 0.0.1-SNAPSHOT                              [17/19]
+[INFO]   from applications/application/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ application ---
+[INFO] Deleting /home/samuel/projects/spring-boot-workspace/applications/application/target
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (enforce-maven-version) @ application ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (jacoco-ut) @ application ---
+[INFO] argLine set to -javaagent:/home/samuel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar=destfile=/home/samuel/projects/spring-boot-workspace/applications/application/target/jacoco-ut.exec
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ application ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ application ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 3 source files with javac [debug deprecation parameters release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ application ---
+[INFO] skip non existing resourceDirectory /home/samuel/projects/spring-boot-workspace/applications/application/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ application ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug deprecation parameters release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ application ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.example.workspace.api.controller.GreetingControllerTest
+19:44:11.901 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.workspace.api.controller.GreetingControllerTest]: GreetingControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:44:12.134 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.workspace.api.controller.ControllerTestApplication for test class com.example.workspace.api.controller.GreetingControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.3)
+
+2026-03-02T19:44:12.855-06:00  INFO 117162 --- [spring-boot-workspace] [           main] c.e.w.a.c.GreetingControllerTest         : Starting GreetingControllerTest using Java 25 with PID 117162 (started by samuel in /home/samuel/projects/spring-boot-workspace/applications/application)
+2026-03-02T19:44:12.858-06:00  INFO 117162 --- [spring-boot-workspace] [           main] c.e.w.a.c.GreetingControllerTest         : No active profile set, falling back to 1 default profile: "default"
+2026-03-02T19:44:15.197-06:00  INFO 117162 --- [spring-boot-workspace] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-03-02T19:44:15.197-06:00  INFO 117162 --- [spring-boot-workspace] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-03-02T19:44:15.200-06:00  INFO 117162 --- [spring-boot-workspace] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2026-03-02T19:44:15.238-06:00  INFO 117162 --- [spring-boot-workspace] [           main] c.e.w.a.c.GreetingControllerTest         : Started GreetingControllerTest in 2.997 seconds (process running for 4.99)
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.072 s -- in com.example.workspace.api.controller.GreetingControllerTest
+[INFO] Running com.example.workspace.api.SpringBootWorkspaceApplicationTests
+2026-03-02T19:44:15.708-06:00  INFO 117162 --- [spring-boot-workspace] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.workspace.api.SpringBootWorkspaceApplicationTests]: SpringBootWorkspaceApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-03-02T19:44:15.723-06:00  INFO 117162 --- [spring-boot-workspace] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.workspace.api.SpringBootWorkspaceApplication for test class com.example.workspace.api.SpringBootWorkspaceApplicationTests
+2026-03-02T19:44:15.777-06:00  INFO 117162 --- [spring-boot-workspace] [           main] org.testcontainers.images.PullPolicy     : Image pull policy will be performed by: DefaultPullPolicy()
+2026-03-02T19:44:15.779-06:00  INFO 117162 --- [spring-boot-workspace] [           main] o.t.utility.ImageNameSubstitutor         : Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2026-03-02T19:44:15.791-06:00  INFO 117162 --- [spring-boot-workspace] [           main] org.testcontainers.DockerClientFactory   : Testcontainers version: 2.0.3
+2026-03-02T19:44:16.279-06:00  INFO 117162 --- [spring-boot-workspace] [           main] o.t.d.DockerClientProviderStrategy       : Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2026-03-02T19:44:16.873-06:00  INFO 117162 --- [spring-boot-workspace] [           main] o.t.d.DockerClientProviderStrategy       : Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+2026-03-02T19:44:16.875-06:00  INFO 117162 --- [spring-boot-workspace] [           main] org.testcontainers.DockerClientFactory   : Docker host IP address is localhost
+2026-03-02T19:44:16.896-06:00  INFO 117162 --- [spring-boot-workspace] [           main] org.testcontainers.DockerClientFactory   : Connected to docker: 
+  Server Version: 28.4.0
+  API Version: 1.51
+  Operating System: Ubuntu 24.04.4 LTS
+  Total Memory: 15777 MB
+2026-03-02T19:44:16.955-06:00  INFO 117162 --- [spring-boot-workspace] [           main] tc.testcontainers/ryuk:0.13.0            : Creating container for image: testcontainers/ryuk:0.13.0
+2026-03-02T19:44:17.099-06:00  INFO 117162 --- [spring-boot-workspace] [           main] tc.testcontainers/ryuk:0.13.0            : Container testcontainers/ryuk:0.13.0 is starting: becdd981415535df78e4527c6f297fa018aafb2b1e8db19889dbf31863c4c528
+2026-03-02T19:44:17.461-06:00  INFO 117162 --- [spring-boot-workspace] [           main] tc.testcontainers/ryuk:0.13.0            : Container testcontainers/ryuk:0.13.0 started in PT0.506820241S
+2026-03-02T19:44:17.467-06:00  INFO 117162 --- [spring-boot-workspace] [           main] o.t.utility.RyukResourceReaper           : Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2026-03-02T19:44:17.468-06:00  INFO 117162 --- [spring-boot-workspace] [           main] org.testcontainers.DockerClientFactory   : Checking the system...
+2026-03-02T19:44:17.469-06:00  INFO 117162 --- [spring-boot-workspace] [           main] org.testcontainers.DockerClientFactory   : ✔︎ Docker server version should be at least 1.6.0
+2026-03-02T19:44:17.470-06:00  INFO 117162 --- [spring-boot-workspace] [           main] tc.postgres:17-alpine                    : Creating container for image: postgres:17-alpine
+2026-03-02T19:44:17.506-06:00  INFO 117162 --- [spring-boot-workspace] [           main] tc.postgres:17-alpine                    : Container postgres:17-alpine is starting: eaabf46fda114c30e693ea6627bf30837e61f7600ba05cca565819cf364d0d91
+2026-03-02T19:44:18.806-06:00  INFO 117162 --- [spring-boot-workspace] [           main] tc.postgres:17-alpine                    : Container postgres:17-alpine started in PT1.335708216S
+2026-03-02T19:44:18.806-06:00  INFO 117162 --- [spring-boot-workspace] [           main] tc.postgres:17-alpine                    : Container is started (JDBC URL: jdbc:postgresql://localhost:32783/testdb?loggerLevel=OFF)
+2026-03-02T19:44:19.217-06:00  INFO 117162 --- [spring-boot-workspace] [           main] liquibase.database                       : Set default schema name to public
+2026-03-02T19:44:19.574-06:00  INFO 117162 --- [spring-boot-workspace] [           main] liquibase.changelog                      : Creating database changelog table with name: public.databasechangelog
+2026-03-02T19:44:19.612-06:00  INFO 117162 --- [spring-boot-workspace] [           main] liquibase.changelog                      : Reading from public.databasechangelog
+2026-03-02T19:44:19.629-06:00  INFO 117162 --- [spring-boot-workspace] [           main] liquibase.snapshot                       : Creating snapshot
+2026-03-02T19:44:19.707-06:00  INFO 117162 --- [spring-boot-workspace] [           main] liquibase.lockservice                    : Successfully acquired change log lock
+2026-03-02T19:44:19.708-06:00  INFO 117162 --- [spring-boot-workspace] [           main] liquibase.command                        : Using deploymentId: 2502259031
+2026-03-02T19:44:19.710-06:00  INFO 117162 --- [spring-boot-workspace] [           main] liquibase.changelog                      : Reading from public.databasechangelog
+Running Changeset: db/changelog/001-create-schema.yaml::001-create-schema::workspace
+2026-03-02T19:44:19.734-06:00  INFO 117162 --- [spring-boot-workspace] [           main] liquibase.changelog                      : Table greeting created
+2026-03-02T19:44:19.736-06:00  INFO 117162 --- [spring-boot-workspace] [           main] liquibase.changelog                      : ChangeSet db/changelog/001-create-schema.yaml::001-create-schema::workspace ran successfully in 8ms
+
+UPDATE SUMMARY
+Run:                          1
+Previously run:               0
+Filtered out:                 0
+-------------------------------
+Total change sets:            1
+
+2026-03-02T19:44:19.746-06:00  INFO 117162 --- [spring-boot-workspace] [           main] liquibase.util                           : UPDATE SUMMARY
+2026-03-02T19:44:19.746-06:00  INFO 117162 --- [spring-boot-workspace] [           main] liquibase.util                           : Run:                          1
+2026-03-02T19:44:19.746-06:00  INFO 117162 --- [spring-boot-workspace] [           main] liquibase.util                           : Previously run:               0
+2026-03-02T19:44:19.746-06:00  INFO 117162 --- [spring-boot-workspace] [           main] liquibase.util                           : Filtered out:                 0
+2026-03-02T19:44:19.747-06:00  INFO 117162 --- [spring-boot-workspace] [           main] liquibase.util                           : -------------------------------
+2026-03-02T19:44:19.747-06:00  INFO 117162 --- [spring-boot-workspace] [           main] liquibase.util                           : Total change sets:            1
+2026-03-02T19:44:19.748-06:00  INFO 117162 --- [spring-boot-workspace] [           main] liquibase.util                           : Update summary generated
+2026-03-02T19:44:19.750-06:00  INFO 117162 --- [spring-boot-workspace] [           main] liquibase.command                        : Update command completed successfully.
+Liquibase: Update has been successful. Rows affected: 0
+2026-03-02T19:44:19.753-06:00  INFO 117162 --- [spring-boot-workspace] [           main] liquibase.lockservice                    : Successfully released change log lock
+2026-03-02T19:44:19.754-06:00  INFO 117162 --- [spring-boot-workspace] [           main] liquibase.command                        : Command execution complete
+2026-03-02T19:44:20.542-06:00  INFO 117162 --- [spring-boot-workspace] [           main] .w.a.SpringBootWorkspaceApplicationTests : Starting SpringBootWorkspaceApplicationTests using Java 25 with PID 117162 (started by samuel in /home/samuel/projects/spring-boot-workspace/applications/application)
+2026-03-02T19:44:20.543-06:00  INFO 117162 --- [spring-boot-workspace] [           main] .w.a.SpringBootWorkspaceApplicationTests : The following 1 profile is active: "test-defaults"
+2026-03-02T19:44:20.920-06:00  INFO 117162 --- [spring-boot-workspace] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-02T19:44:20.963-06:00  INFO 117162 --- [spring-boot-workspace] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 32 ms. Found 1 JPA repository interface.
+2026-03-02T19:44:21.682-06:00  INFO 117162 --- [spring-boot-workspace] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-03-02T19:44:21.748-06:00  INFO 117162 --- [spring-boot-workspace] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-03-02T19:44:22.103-06:00  INFO 117162 --- [spring-boot-workspace] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-02T19:44:22.147-06:00  INFO 117162 --- [spring-boot-workspace] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-02T19:44:22.169-06:00  INFO 117162 --- [spring-boot-workspace] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7800114f
+2026-03-02T19:44:22.170-06:00  INFO 117162 --- [spring-boot-workspace] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-02T19:44:22.256-06:00  INFO 117162 --- [spring-boot-workspace] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:32783/testdb?loggerLevel=OFF]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 17.9
+	Default catalog/schema: testdb/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-02T19:44:23.172-06:00  INFO 117162 --- [spring-boot-workspace] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-02T19:44:23.180-06:00  INFO 117162 --- [spring-boot-workspace] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-02T19:44:23.257-06:00  INFO 117162 --- [spring-boot-workspace] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-02T19:44:24.325-06:00  INFO 117162 --- [spring-boot-workspace] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 13 endpoints beneath base path '/actuator'
+2026-03-02T19:44:24.403-06:00  INFO 117162 --- [spring-boot-workspace] [           main] .w.a.SpringBootWorkspaceApplicationTests : Started SpringBootWorkspaceApplicationTests in 3.893 seconds (process running for 14.154)
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.769 s -- in com.example.workspace.api.SpringBootWorkspaceApplicationTests
+[INFO] Running com.example.workspace.application.ApplicationArchitectureTest
+2026-03-02T19:44:24.497-06:00  INFO 117162 --- [spring-boot-workspace] [           main] com.tngtech.archunit.core.PluginLoader   : Detected Java version 25
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.401 s -- in com.example.workspace.application.ApplicationArchitectureTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-ut-report) @ application ---
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/applications/application/target/jacoco-ut.exec
+[INFO] Analyzed bundle 'application' with 3 classes
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-ut-check) @ application ---
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/applications/application/target/jacoco-ut.exec
+[INFO] Analyzed bundle 'application' with 3 classes
+[INFO] All coverage checks have been met.
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ application ---
+[INFO] Building jar: /home/samuel/projects/spring-boot-workspace/applications/application/target/application-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.0.3:repackage (default) @ application ---
+[INFO] Replacing main artifact /home/samuel/projects/spring-boot-workspace/applications/application/target/application-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /home/samuel/projects/spring-boot-workspace/applications/application/target/application-0.0.1-SNAPSHOT.jar.original
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent-integration (jacoco-it) @ application ---
+[INFO] argLine set to -javaagent:/home/samuel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.13/org.jacoco.agent-0.8.13-runtime.jar=destfile=/home/samuel/projects/spring-boot-workspace/applications/application/target/jacoco-it.exec
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-integration (jacoco-it-report) @ application ---
+[INFO] Skipping JaCoCo execution due to missing execution data file.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-it-check) @ application ---
+[INFO] Skipping JaCoCo execution due to missing execution data file:/home/samuel/projects/spring-boot-workspace/applications/application/target/jacoco-it.exec
+[INFO] 
+[INFO] --- jacoco:0.8.13:merge (jacoco-merged) @ application ---
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/applications/application/target/jacoco-ut.exec
+[INFO] Writing merged execution data to /home/samuel/projects/spring-boot-workspace/applications/application/target/jacoco-merged.exec
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-merged-report) @ application ---
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/applications/application/target/jacoco-merged.exec
+[INFO] Analyzed bundle 'application' with 3 classes
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-merged-check) @ application ---
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/applications/application/target/jacoco-merged.exec
+[INFO] Analyzed bundle 'application' with 3 classes
+[INFO] All coverage checks have been met.
+[INFO] 
+[INFO] --- antrun:3.1.0:run (jacoco-dark-theme) @ application ---
+[INFO] Executing tasks
+[INFO]     [mkdir] Created dir: /home/samuel/projects/spring-boot-workspace/applications/application/target/jacoco-dark-theme
+[INFO]      [copy] Copying 1 resource to /home/samuel/projects/spring-boot-workspace/applications/application/target/jacoco-dark-theme
+[INFO]      [copy] Copying 1 file to /home/samuel/projects/spring-boot-workspace/applications/application/target/site/jacoco-ut/jacoco-resources
+[INFO]      [copy] Copying 1 file to /home/samuel/projects/spring-boot-workspace/applications/application/target/site/jacoco-it/jacoco-resources
+[INFO]      [copy] Copying 1 file to /home/samuel/projects/spring-boot-workspace/applications/application/target/site/jacoco-merged/jacoco-resources
+[INFO] Executed tasks
+[INFO] 
+[INFO] ----------------------< com.example:applications >----------------------
+[INFO] Building applications 0.0.1-SNAPSHOT                             [18/19]
+[INFO]   from applications/pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ applications ---
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (enforce-maven-version) @ applications ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent (jacoco-ut) @ applications ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-ut-report) @ applications ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-ut-check) @ applications ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:prepare-agent-integration (jacoco-it) @ applications ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-integration (jacoco-it-report) @ applications ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-it-check) @ applications ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:merge (jacoco-merged) @ applications ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:report (jacoco-merged-report) @ applications ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- jacoco:0.8.13:check (jacoco-merged-check) @ applications ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] 
+[INFO] --- antrun:3.1.0:run (jacoco-dark-theme) @ applications ---
+[INFO] Skipping Antrun execution
+[INFO] 
+[INFO] ------------------------< com.example:coverage >------------------------
+[INFO] Building coverage 0.0.1-SNAPSHOT                                 [19/19]
+[INFO]   from coverage/pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ coverage ---
+[INFO] Deleting /home/samuel/projects/spring-boot-workspace/coverage/target
+[INFO] 
+[INFO] --- enforcer:3.6.2:enforce (enforce-maven-version) @ coverage ---
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-aggregate (aggregate-ut-report) @ coverage ---
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/libraries/library/target/jacoco-ut.exec
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/libraries/spring-library/target/jacoco-ut.exec
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/applications/application/target/jacoco-ut.exec
+[INFO] Analyzed bundle 'library' with 2 classes
+[INFO] Analyzed bundle 'spring-library' with 2 classes
+[INFO] Analyzed bundle 'application' with 3 classes
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-aggregate (aggregate-it-report) @ coverage ---
+[INFO] Analyzed bundle 'library' with 2 classes
+[INFO] Analyzed bundle 'spring-library' with 2 classes
+[INFO] Analyzed bundle 'application' with 3 classes
+[INFO] 
+[INFO] --- jacoco:0.8.13:report-aggregate (aggregate-merged-report) @ coverage ---
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/libraries/library/target/jacoco-merged.exec
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/libraries/spring-library/target/jacoco-merged.exec
+[INFO] Loading execution data file /home/samuel/projects/spring-boot-workspace/applications/application/target/jacoco-merged.exec
+[INFO] Analyzed bundle 'library' with 2 classes
+[INFO] Analyzed bundle 'spring-library' with 2 classes
+[INFO] Analyzed bundle 'application' with 3 classes
+[INFO] 
+[INFO] --- antrun:3.1.0:run (jacoco-aggregate-dark-theme) @ coverage ---
+[INFO] Executing tasks
+[INFO]     [mkdir] Created dir: /home/samuel/projects/spring-boot-workspace/coverage/target/jacoco-dark-theme
+[INFO]      [copy] Copying 1 resource to /home/samuel/projects/spring-boot-workspace/coverage/target/jacoco-dark-theme
+[INFO]      [copy] Copying 1 file to /home/samuel/projects/spring-boot-workspace/coverage/target/site/jacoco-aggregate-ut/jacoco-resources
+[INFO]      [copy] Copying 1 file to /home/samuel/projects/spring-boot-workspace/coverage/target/site/jacoco-aggregate-it/jacoco-resources
+[INFO]      [copy] Copying 1 file to /home/samuel/projects/spring-boot-workspace/coverage/target/site/jacoco-aggregate-merged/jacoco-resources
+[INFO] Executed tasks
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for spring-boot-workspace 0.0.1-SNAPSHOT:
+[INFO] 
+[INFO] spring-boot-workspace .............................. SUCCESS [  0.539 s]
+[INFO] shared-parent ...................................... SUCCESS [  0.049 s]
+[INFO] build-tools ........................................ SUCCESS [  0.967 s]
+[INFO] external-bom ....................................... SUCCESS [  0.024 s]
+[INFO] internal-bom ....................................... SUCCESS [  0.022 s]
+[INFO] boms ............................................... SUCCESS [  0.020 s]
+[INFO] liquibase .......................................... SUCCESS [  0.116 s]
+[INFO] archunit-rules ..................................... SUCCESS [  1.965 s]
+[INFO] test-fixtures ...................................... SUCCESS [  0.817 s]
+[INFO] shared ............................................. SUCCESS [  0.008 s]
+[INFO] library-parent ..................................... SUCCESS [  0.191 s]
+[INFO] application-parent ................................. SUCCESS [  0.044 s]
+[INFO] parents ............................................ SUCCESS [  0.007 s]
+[INFO] library ............................................ SUCCESS [ 13.485 s]
+[INFO] spring-library ..................................... SUCCESS [  2.605 s]
+[INFO] libraries .......................................... SUCCESS [  0.008 s]
+[INFO] application ........................................ SUCCESS [ 17.252 s]
+[INFO] applications ....................................... SUCCESS [  0.006 s]
+[INFO] coverage ........................................... SUCCESS [  0.341 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  38.758 s
+[INFO] Finished at: 2026-03-02T19:44:26-06:00
+[INFO] ------------------------------------------------------------------------
