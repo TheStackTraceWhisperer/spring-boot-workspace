@@ -1,0 +1,12 @@
+# ──────────────────────────────────────────────────────────────
+# Shared test defaults – loaded by all Spring Boot test modules
+# via @ActiveProfiles("test-defaults") on the abstract base class.
+#
+# Add common test-only settings here so they apply everywhere
+# without duplicating configuration across modules.
+# ──────────────────────────────────────────────────────────────
+
+spring:
+  main:
+    banner-mode: off
+

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.example</groupId>
+    <artifactId>spring-boot-workspace</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>coverage</artifactId>
+  <packaging>pom</packaging>
+  <name>coverage</name>
+  <description>Aggregated JaCoCo coverage reports across all code modules</description>
+
+  <properties>
+    <!-- Enable JaCoCo for this module (root defaults to skip) -->
+    <jacoco.skip>false</jacoco.skip>
+  </properties>
+
+  <!-- Import internal BOM so we don't need explicit versions -->
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.example</groupId>
+        <artifactId>internal-bom</artifactId>
+        <version>${project.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <!--
+    report-aggregate resolves class files and source files from these
+    dependencies. Every module whose coverage should appear in the
+    aggregated report must be listed here.
+  -->
+  <dependencies>
+    <dependency>
+      <groupId>com.example</groupId>
+      <artifactId>library</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.example</groupId>
+      <artifactId>spring-library</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.example</groupId>
+      <artifactId>rest-service</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <executions>
+          <!--
+            Disable all inherited per-module executions.
+            This module has no source code — only report-aggregate should run.
+          -->
+          <execution>
+            <id>jacoco-ut</id>
+            <phase>none</phase>
+          </execution>
+          <execution>
+            <id>jacoco-ut-report</id>
+            <phase>none</phase>
+          </execution>
+          <execution>
+            <id>jacoco-ut-check</id>
+            <phase>none</phase>
+          </execution>
+          <execution>
+            <id>jacoco-it</id>
+            <phase>none</phase>
+          </execution>
+          <execution>
+            <id>jacoco-it-report</id>
+            <phase>none</phase>
+          </execution>
+          <execution>
+            <id>jacoco-it-check</id>
+            <phase>none</phase>
+          </execution>
+          <execution>
+            <id>jacoco-merged</id>
+            <phase>none</phase>
+          </execution>
+          <execution>
+            <id>jacoco-merged-report</id>
+            <phase>none</phase>
+          </execution>
+          <execution>
+            <id>jacoco-merged-check</id>
+            <phase>none</phase>
+          </execution>
+
+          <!-- Aggregated unit-test report -->
+          <execution>
+            <id>aggregate-ut-report</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>report-aggregate</goal>
+            </goals>
+            <configuration>
+              <dataFileIncludes>
+                <dataFileInclude>**/jacoco-ut.exec</dataFileInclude>
+              </dataFileIncludes>
+              <outputDirectory>${project.reporting.outputDirectory}/jacoco-aggregate-ut</outputDirectory>
+              <title>Aggregated Unit Test Coverage</title>
+            </configuration>
+          </execution>
+
+          <!-- Aggregated integration-test report -->
+          <execution>
+            <id>aggregate-it-report</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>report-aggregate</goal>
+            </goals>
+            <configuration>
+              <dataFileIncludes>
+                <dataFileInclude>**/jacoco-it.exec</dataFileInclude>
+              </dataFileIncludes>
+              <outputDirectory>${project.reporting.outputDirectory}/jacoco-aggregate-it</outputDirectory>
+              <title>Aggregated Integration Test Coverage</title>
+            </configuration>
+          </execution>
+
+          <!-- Aggregated merged (UT + IT) report -->
+          <execution>
+            <id>aggregate-merged-report</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>report-aggregate</goal>
+            </goals>
+            <configuration>
+              <dataFileIncludes>
+                <dataFileInclude>**/jacoco-merged.exec</dataFileInclude>
+              </dataFileIncludes>
+              <outputDirectory>${project.reporting.outputDirectory}/jacoco-aggregate-merged</outputDirectory>
+              <title>Aggregated Merged Coverage</title>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Apply dark theme to aggregated reports -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <!-- Override inherited execution — it targets per-module report dirs that don't exist here -->
+          <execution>
+            <id>jacoco-dark-theme</id>
+            <phase>none</phase>
+          </execution>
+          <!-- Dark theme for aggregated reports -->
+          <execution>
+            <id>jacoco-aggregate-dark-theme</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <mkdir dir="${project.build.directory}/jacoco-dark-theme" />
+                <copy tofile="${project.build.directory}/jacoco-dark-theme/report.css" overwrite="true">
+                  <javaresource name="jacoco/report.css" classpathref="maven.plugin.classpath" />
+                </copy>
+                <copy file="${project.build.directory}/jacoco-dark-theme/report.css"
+                      todir="${project.reporting.outputDirectory}/jacoco-aggregate-ut/jacoco-resources"
+                      overwrite="true" failonerror="false" quiet="true" />
+                <copy file="${project.build.directory}/jacoco-dark-theme/report.css"
+                      todir="${project.reporting.outputDirectory}/jacoco-aggregate-it/jacoco-resources"
+                      overwrite="true" failonerror="false" quiet="true" />
+                <copy file="${project.build.directory}/jacoco-dark-theme/report.css"
+                      todir="${project.reporting.outputDirectory}/jacoco-aggregate-merged/jacoco-resources"
+                      overwrite="true" failonerror="false" quiet="true" />
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
+

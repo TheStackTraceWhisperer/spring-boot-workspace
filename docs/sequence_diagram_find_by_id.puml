@@ -1,0 +1,27 @@
+@startuml
+actor User
+participant GreetingController
+participant GreetingService
+participant GreetingRepository
+
+User -> GreetingController: GET /api/greetings/{id}
+activate GreetingController
+
+GreetingController -> GreetingService: findById(id)
+activate GreetingService
+
+GreetingService -> GreetingRepository: findById(id)
+activate GreetingRepository
+GreetingRepository --> GreetingService: Optional<Greeting>
+deactivate GreetingRepository
+
+GreetingService --> GreetingController: Optional<Greeting>
+deactivate GreetingService
+
+alt Greeting found
+    GreetingController --> User: 200 OK (Greeting)
+else Greeting not found
+    GreetingController --> User: 404 Not Found
+end
+deactivate GreetingController
+@enduml

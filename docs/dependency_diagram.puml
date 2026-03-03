@@ -1,0 +1,50 @@
+@startuml
+skinparam componentStyle uml2
+
+skinparam component {
+    BackgroundColor<<Application>> #E1F5FE
+    BackgroundColor<<Library>> #E8F5E9
+    BackgroundColor<<Shared>> #FFF3E0
+    BorderColor Black
+    ArrowColor Black
+}
+
+title Module Dependencies
+
+package "Applications" {
+    component "rest-service" as app <<Application>>
+}
+
+package "Libraries" {
+    component "library" as lib <<Library>>
+}
+
+package "Shared" {
+    component "liquibase" as liq <<Shared>>
+    component "test-fixtures" as test <<Shared>>
+    component "archunit-rules" as arch <<Shared>>
+    component "build-tools" as build <<Shared>>
+}
+
+' Compile Dependencies
+app -down-> lib #Green : compile
+app -down-> liq #Green : compile
+
+' Test Dependencies (Inherited via Parents)
+app .down.> test #Orange : test
+app .down.> arch #Orange : test
+
+lib .down.> liq #Orange : test
+lib .down.> test #Orange : test
+lib .down.> arch #Orange : test
+
+' Build Tools Usage
+' Note: Build tools are used by the build system (plugins), not directly by the modules at runtime/test time.
+' However, for completeness, we show that the build process for these modules relies on build-tools.
+app .down.> build #Purple : build
+lib .down.> build #Purple : build
+liq .down.> build #Purple : build
+test .down.> build #Purple : build
+arch .down.> build #Purple : build
+
+@enduml

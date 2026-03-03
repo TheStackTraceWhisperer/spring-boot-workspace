@@ -1,0 +1,48 @@
+package com.example.workspace.core.archunit;
+
+import com.tngtech.archunit.core.domain.JavaClasses;
+import com.tngtech.archunit.core.importer.ClassFileImporter;
+import com.tngtech.archunit.lang.ArchRule;
+import org.junit.jupiter.api.Test;
+
+import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
+
+/**
+ * Architecture tests for the core module.
+ *
+ * Tests ensure proper architectural boundaries and patterns.
+ */
+class ArchitectureTest {
+
+  private final JavaClasses importedClasses = new ClassFileImporter()
+      .importPackages("com.example.workspace.core");
+
+  @Test
+  void servicesShouldNotDependOnControllers() {
+    ArchRule rule = noClasses()
+        .that().resideInAPackage("..service..")
+        .should().dependOnClassesThat().resideInAPackage("..controller..");
+
+    rule.check(importedClasses);
+  }
+
+  @Test
+  void servicesShouldBeNamedProperly() {
+    ArchRule rule = com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes()
+        .that().resideInAPackage("..service..")
+        .and().areAnnotatedWith(org.springframework.stereotype.Service.class)
+        .should().haveSimpleNameEndingWith("Service");
+
+    rule.check(importedClasses);
+  }
+
+  @Test
+  void noClassesShouldUseJavaUtilLogging() {
+    ArchRule rule = noClasses()
+        .should().accessClassesThat().resideInAPackage("java.util.logging..")
+        .because("use SLF4J instead");
+
+    rule.check(importedClasses);
+  }
+}
+

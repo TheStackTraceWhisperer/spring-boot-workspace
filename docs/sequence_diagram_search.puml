@@ -1,0 +1,23 @@
+@startuml
+actor User
+participant GreetingController
+participant GreetingService
+participant GreetingRepository
+
+User -> GreetingController: GET /api/greetings/search?keyword=Hello
+activate GreetingController
+
+GreetingController -> GreetingService: search("Hello")
+activate GreetingService
+
+GreetingService -> GreetingRepository: findByMessageContainingIgnoreCase("Hello")
+activate GreetingRepository
+GreetingRepository --> GreetingService: List<Greeting>
+deactivate GreetingRepository
+
+GreetingService --> GreetingController: List<Greeting>
+deactivate GreetingService
+
+GreetingController --> User: 200 OK (List<Greeting>)
+deactivate GreetingController
+@enduml

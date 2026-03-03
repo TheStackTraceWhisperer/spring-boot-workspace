@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.example</groupId>
+    <artifactId>shared-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../../parents/shared-parent</relativePath>
+  </parent>
+
+  <artifactId>test-fixtures</artifactId>
+  <name>test-fixtures</name>
+  <description>Shared Testcontainer definitions and abstract base test classes</description>
+
+  <dependencies>
+    <!-- Testcontainers core -->
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>testcontainers</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Testcontainers JUnit 5 integration -->
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>testcontainers-junit-jupiter</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Testcontainers PostgreSQL -->
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>testcontainers-postgresql</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Liquibase core for running migrations -->
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Liquibase changelogs -->
+    <dependency>
+      <groupId>com.example</groupId>
+      <artifactId>liquibase</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <!-- PostgreSQL JDBC driver -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Spring Test / Spring Boot Test for base classes -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-test</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-testcontainers</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- JUnit 5 API -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Spring Context for DynamicPropertySource -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Spring JDBC for DataSource -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+</project>

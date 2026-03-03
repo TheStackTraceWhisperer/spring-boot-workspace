@@ -1,0 +1,52 @@
+@startuml
+skinparam class {
+    BackgroundColor<<Controller>> #E1F5FE
+    BackgroundColor<<Service>> #E8F5E9
+    BackgroundColor<<Repository>> #FFF3E0
+    BackgroundColor<<Entity>> #FFFDE7
+    BorderColor Black
+    ArrowColor Black
+}
+
+package "com.example.workspace.api.controller" {
+  class GreetingController <<Controller>> {
+    - greetingService : GreetingService
+    + create(name : String) : ResponseEntity<Greeting>
+    + findById(id : Long) : ResponseEntity<Greeting>
+    + findAll() : List<Greeting>
+    + search(keyword : String) : List<Greeting>
+  }
+}
+
+package "com.example.workspace.core.service" {
+  class GreetingService <<Service>> {
+    - greetingRepository : GreetingRepository
+    + create(name : String) : Greeting
+    + findById(id : Long) : Optional<Greeting>
+    + findAll() : List<Greeting>
+    + search(keyword : String) : List<Greeting>
+  }
+}
+
+package "com.example.workspace.core.repository" {
+  interface GreetingRepository <<Repository>> {
+    + findByMessageContainingIgnoreCase(keyword : String) : List<Greeting>
+  }
+}
+
+package "com.example.workspace.core.domain" {
+  class Greeting <<Entity>> {
+    - id : Long
+    - message : String
+    - createdAt : Instant
+    + getId() : Long
+    + getMessage() : String
+    + getCreatedAt() : Instant
+  }
+}
+
+GreetingController --> GreetingService : uses
+GreetingService --> GreetingRepository : uses
+GreetingRepository ..> Greeting : manages
+GreetingService ..> Greeting : returns
+@enduml

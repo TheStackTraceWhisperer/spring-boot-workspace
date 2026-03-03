@@ -1,0 +1,90 @@
+@startuml
+skinparam componentStyle uml2
+skinparam linetype ortho
+skinparam nodesep 100
+skinparam ranksep 100
+
+' Colors
+skinparam component {
+    BackgroundColor<<Root>> #E0E0E0
+    BackgroundColor<<BOM>> #FFCCBC
+    BackgroundColor<<Parent>> #BBDEFB
+    BackgroundColor<<Module>> #FFF9C4
+    BackgroundColor<<Shared>> #C8E6C9
+    BorderColor Black
+    ArrowColor Black
+}
+
+title Project Architecture & Build Structure
+
+' --- Logical Architecture (Code Modules) ---
+package "Applications" {
+    component "rest-service" as application <<Module>>
+}
+
+package "Domain Libraries" {
+    component "library" as library <<Module>>
+}
+
+package "Shared Capabilities" {
+    component "liquibase" as liquibase <<Shared>>
+    component "test-fixtures" as test_fixtures <<Shared>>
+    component "archunit-rules" as archunit_rules <<Shared>>
+    component "build-tools" as build_tools <<Shared>>
+}
+
+' --- Build Infrastructure (POMs & BOMs) ---
+package "Build System" {
+    component "spring-boot-workspace" as root_pom <<Root>>
+
+    package "BOMs" {
+        component "external-bom" as external_bom <<BOM>>
+        component "internal-bom" as internal_bom <<BOM>>
+    }
+
+    package "Parents" {
+        component "application-parent" as application_parent <<Parent>>
+        component "library-parent" as library_parent <<Parent>>
+        component "shared-parent" as shared_parent <<Parent>>
+    }
+}
+
+' --- Relationships ---
+
+' 1. Logical Dependencies (Code usage)
+application -down-> library #Green : uses
+application -down-> liquibase #Green : uses
+
+' 2. Test Dependencies (Implicit via Parents, but shown for clarity)
+library .down.> liquibase #Orange : test
+library .down.> test_fixtures #Orange : test
+application .down.> test_fixtures #Orange : test
+
+' 3. Build Inheritance (The "Managed By" view)
+application -right-|> application_parent #Blue
+library -right-|> library_parent #Blue
+liquibase -right-|> shared_parent #Blue
+test_fixtures -right-|> shared_parent #Blue
+archunit_rules -right-|> shared_parent #Blue
+build_tools -right-|> shared_parent #Blue
+
+' 4. Build System Internals
+application_parent -up-|> root_pom #Blue
+library_parent -up-|> root_pom #Blue
+shared_parent -up-|> root_pom #Blue
+external_bom -up-|> root_pom #Blue
+internal_bom -up-|> root_pom #Blue
+
+application_parent .down.> internal_bom #Red : imports
+library_parent .down.> external_bom #Red : imports
+shared_parent .down.> external_bom #Red : imports
+internal_bom .down.> external_bom #Red : imports
+
+' 5. Parent Capabilities
+' Show that parents provide these shared capabilities
+application_parent .down.> archunit_rules #Orange : provides
+application_parent .down.> test_fixtures #Orange : provides
+library_parent .down.> archunit_rules #Orange : provides
+library_parent .down.> test_fixtures #Orange : provides
+
+@enduml

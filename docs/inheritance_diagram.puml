@@ -1,0 +1,60 @@
+@startuml
+skinparam componentStyle uml2
+
+skinparam component {
+    BackgroundColor<<Root>> #E0E0E0
+    BackgroundColor<<BOM>> #FFCCBC
+    BackgroundColor<<Parent>> #BBDEFB
+    BackgroundColor<<Module>> #FFF9C4
+    BackgroundColor<<Shared>> #C8E6C9
+    BorderColor Black
+    ArrowColor Black
+}
+
+title Maven Inheritance Hierarchy
+
+component "spring-boot-workspace" as root <<Root>>
+
+package "BOMs" {
+    component "external-bom" as external_bom <<BOM>>
+    component "internal-bom" as internal_bom <<BOM>>
+}
+
+package "Parents" {
+    component "application-parent" as application_parent <<Parent>>
+    component "library-parent" as library_parent <<Parent>>
+    component "shared-parent" as shared_parent <<Parent>>
+}
+
+package "Applications" {
+    component "rest-service" as application <<Module>>
+}
+
+package "Libraries" {
+    component "library" as library <<Module>>
+}
+
+package "Shared" {
+    component "liquibase" as liquibase <<Shared>>
+    component "test-fixtures" as test_fixtures <<Shared>>
+    component "archunit-rules" as archunit_rules <<Shared>>
+    component "build-tools" as build_tools <<Shared>>
+}
+
+' Inheritance Relationships (Child -> Parent)
+external_bom -up-|> root #Blue
+internal_bom -up-|> root #Blue
+
+application_parent -up-|> root #Blue
+library_parent -up-|> root #Blue
+shared_parent -up-|> root #Blue
+
+application -up-|> application_parent #Blue
+library -up-|> library_parent #Blue
+
+liquibase -up-|> shared_parent #Blue
+test_fixtures -up-|> shared_parent #Blue
+archunit_rules -up-|> shared_parent #Blue
+build_tools -up-|> shared_parent #Blue
+
+@enduml
